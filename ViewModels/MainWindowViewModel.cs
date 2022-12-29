@@ -9,6 +9,7 @@ namespace ToDo.ViewModels
 {
     public class MainWindowViewModel : ViewModelBase
     {
+        DataBase DB;
         ViewModelBase content;
         public ViewModelBase Content
         {
@@ -19,6 +20,7 @@ namespace ToDo.ViewModels
         public MainWindowViewModel(DataBase db)
         {
             Content = Items = new ToDoListViewModel(db.Get());
+            this.DB = db;
         }
         public void NewItem()
         {
@@ -41,6 +43,10 @@ namespace ToDo.ViewModels
         public void RemoveItem()
         {
             Items.Items.Remove(Items.Items.ToList().Find(x => x.Name == Items.ItemSelected.Name));
+        }
+        public void Save()
+        {
+            this.DB.Save(Items.Items);
         }
     }
 }

@@ -18,9 +18,12 @@ namespace ToDo.Models
             }
             else return new List<ToDoItem>();
         }
-        public void Save()
+        public void Save(IEnumerable<ToDoItem> items)
         {
-            
+            using (var jsonSW = new StreamWriter(@"data.json"))
+                {
+                    jsonSW.Write(JsonConvert.SerializeObject(items, Formatting.Indented));
+                }
         }
 
     }

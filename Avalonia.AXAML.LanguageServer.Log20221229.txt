@@ -3411,3 +3411,16 @@ System.Threading.Channels.ChannelClosedException: The channel has been closed.
 2022-12-29 18:57:01.075 +03:00 [VRB] Converting params for Notification textDocument/didSave to OmniSharp.Extensions.LanguageServer.Protocol.Models.DidSaveTextDocumentParams
 2022-12-29 18:57:01.075 +03:00 [DBG] Finished: Routing Notification textDocument/didSave in 0ms
 2022-12-29 18:57:01.075 +03:00 [DBG] Finished: Processing notification textDocument/didSave in 0ms
+2022-12-29 20:30:38.397 +03:00 [DBG] Finding descriptors for textDocument/didOpen
+2022-12-29 20:30:38.397 +03:00 [VRB] Created attribute xml::file:///home/zero/dev/CSharp/Avalonia/ToDoMVVM/ToDo/App.axaml
+2022-12-29 20:30:38.397 +03:00 [VRB] Looking for handler for descriptors textDocument/didOpen
+2022-12-29 20:30:38.398 +03:00 [VRB] Checking handler textDocument/didOpen:Avalonia.AXAML.LanguageServer.Handlers.TextDocumentHandler
+2022-12-29 20:30:38.398 +03:00 [VRB] Registration options OmniSharp.Extensions.LanguageServer.Protocol.Models.TextDocumentOpenRegistrationOptions
+2022-12-29 20:30:38.398 +03:00 [VRB] Document Selector [**/*.xaml], [**/*.axaml]
+2022-12-29 20:30:38.406 +03:00 [VRB] Handler Selected: Avalonia.AXAML.LanguageServer.Handlers.TextDocumentHandler  via [**/*.xaml], [**/*.axaml] (targeting OmniSharp.Extensions.JsonRpc.IJsonRpcNotificationHandler`1[[OmniSharp.Extensions.LanguageServer.Protocol.Models.DidOpenTextDocumentParams, OmniSharp.Extensions.LanguageProtocol, Version=0.19.0.0, Culture=neutral, PublicKeyToken=6d868dff454e6022]])
+2022-12-29 20:30:38.406 +03:00 [DBG] Queueing "Serial":textDocument/didOpen request for processing
+2022-12-29 20:30:38.406 +03:00 [DBG] Starting: Processing notification textDocument/didOpen
+2022-12-29 20:30:38.406 +03:00 [DBG] Starting: Routing Notification textDocument/didOpen
+2022-12-29 20:30:38.406 +03:00 [VRB] Converting params for Notification textDocument/didOpen to OmniSharp.Extensions.LanguageServer.Protocol.Models.DidOpenTextDocumentParams
+2022-12-29 20:30:38.407 +03:00 [DBG] Finished: Routing Notification textDocument/didOpen in 0ms
+2022-12-29 20:30:38.407 +03:00 [DBG] Finished: Processing notification textDocument/didOpen in 0ms

@@ -23,6 +23,7 @@ namespace ToDo
                 {
                     DataContext = new MainWindowViewModel(db),
                 };
+                
             }
 
             base.OnFrameworkInitializationCompleted();

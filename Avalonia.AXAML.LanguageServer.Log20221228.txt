@@ -1,0 +1,110 @@
+2022-12-28 20:43:47.639 +03:00 [INF] Starting log...
+2022-12-28 20:43:48.425 +03:00 [DBG] Finding descriptors for initialize
+2022-12-28 20:43:48.614 +03:00 [DBG] Queueing "Serial":initialize:0 request for processing
+2022-12-28 20:43:48.635 +03:00 [DBG] Starting: Processing request initialize 0
+2022-12-28 20:43:48.642 +03:00 [DBG] Starting: Routing Request (0) initialize
+2022-12-28 20:43:48.652 +03:00 [VRB] Converting params for Request (0) initialize to OmniSharp.Extensions.LanguageServer.Protocol.Models.InternalInitializeParams
+2022-12-28 20:43:48.653 +03:00 [VRB] Converting params for Notification initialize to OmniSharp.Extensions.LanguageServer.Protocol.Models.InternalInitializeParams
+2022-12-28 20:43:48.903 +03:00 [INF] GetRegistrationOptions method
+2022-12-28 20:43:48.995 +03:00 [VRB] Response value was OmniSharp.Extensions.LanguageServer.Protocol.Models.InitializeResult
+2022-12-28 20:43:48.998 +03:00 [DBG] Finished: Routing Request (0) initialize in 355ms
+2022-12-28 20:43:48.998 +03:00 [DBG] Finished: Processing request initialize 0 in 360ms
+2022-12-28 20:43:49.047 +03:00 [DBG] Finding descriptors for initialized
+2022-12-28 20:43:49.048 +03:00 [DBG] Queueing "Serial":initialized request for processing
+2022-12-28 20:43:49.053 +03:00 [DBG] Starting: Processing notification initialized
+2022-12-28 20:43:49.055 +03:00 [DBG] Starting: Routing Notification initialized
+2022-12-28 20:43:49.055 +03:00 [VRB] Converting params for Notification initialized to OmniSharp.Extensions.LanguageServer.Protocol.Models.InitializedParams
+2022-12-28 20:43:49.122 +03:00 [WRN] No ConfigurationItems have been defined, configuration won't surface any configuration from the client!
+2022-12-28 20:43:49.146 +03:00 [DBG] Finished: Routing Notification initialized in 90ms
+2022-12-28 20:43:49.146 +03:00 [DBG] Finished: Processing notification initialized in 92ms
+2022-12-28 20:43:49.147 +03:00 [DBG] Finding descriptors for textDocument/didOpen
+2022-12-28 20:43:49.154 +03:00 [VRB] Created attribute xml::file:///home/zero/dev/CSharp/Avalonia/ToDoMVVM/ToDo/Views/NewItemView.axaml
+2022-12-28 20:43:49.157 +03:00 [VRB] Looking for handler for descriptors textDocument/didOpen
+2022-12-28 20:43:49.157 +03:00 [VRB] Checking handler textDocument/didOpen:Avalonia.AXAML.LanguageServer.Handlers.TextDocumentHandler
+2022-12-28 20:43:49.157 +03:00 [VRB] Registration options OmniSharp.Extensions.LanguageServer.Protocol.Models.TextDocumentOpenRegistrationOptions
+2022-12-28 20:43:49.157 +03:00 [VRB] Document Selector [**/*.xaml], [**/*.axaml]
+2022-12-28 20:43:49.161 +03:00 [VRB] Handler Selected: Avalonia.AXAML.LanguageServer.Handlers.TextDocumentHandler  via [**/*.xaml], [**/*.axaml] (targeting OmniSharp.Extensions.JsonRpc.IJsonRpcNotificationHandler`1[[OmniSharp.Extensions.LanguageServer.Protocol.Models.DidOpenTextDocumentParams, OmniSharp.Extensions.LanguageProtocol, Version=0.19.0.0, Culture=neutral, PublicKeyToken=6d868dff454e6022]])
+2022-12-28 20:43:49.162 +03:00 [DBG] Queueing "Serial":textDocument/didOpen request for processing
+2022-12-28 20:43:49.162 +03:00 [DBG] Starting: Processing notification textDocument/didOpen
+2022-12-28 20:43:49.162 +03:00 [DBG] Starting: Routing Notification textDocument/didOpen
+2022-12-28 20:43:49.162 +03:00 [VRB] Converting params for Notification textDocument/didOpen to OmniSharp.Extensions.LanguageServer.Protocol.Models.DidOpenTextDocumentParams
+2022-12-28 20:43:49.165 +03:00 [DBG] Finished: Routing Notification textDocument/didOpen in 2ms
+2022-12-28 20:43:49.165 +03:00 [DBG] Finished: Processing notification textDocument/didOpen in 2ms
+2022-12-28 20:43:56.458 +03:00 [DBG] Finding descriptors for textDocument/didChange
+2022-12-28 20:43:56.471 +03:00 [VRB] Found attributes 1, ["xml::file:///home/zero/dev/CSharp/Avalonia/ToDoMVVM/ToDo/Views/NewItemView.axaml"]
+2022-12-28 20:43:56.472 +03:00 [VRB] Looking for handler for descriptors textDocument/didChange
+2022-12-28 20:43:56.472 +03:00 [VRB] Checking handler textDocument/didChange:Avalonia.AXAML.LanguageServer.Handlers.TextDocumentHandler
+2022-12-28 20:43:56.472 +03:00 [VRB] Registration options OmniSharp.Extensions.LanguageServer.Protocol.Models.TextDocumentChangeRegistrationOptions
+2022-12-28 20:43:56.472 +03:00 [VRB] Document Selector [**/*.xaml], [**/*.axaml]
+2022-12-28 20:43:56.472 +03:00 [VRB] Handler Selected: Avalonia.AXAML.LanguageServer.Handlers.TextDocumentHandler  via [**/*.xaml], [**/*.axaml] (targeting OmniSharp.Extensions.JsonRpc.IJsonRpcNotificationHandler`1[[OmniSharp.Extensions.LanguageServer.Protocol.Models.DidChangeTextDocumentParams, OmniSharp.Extensions.LanguageProtocol, Version=0.19.0.0, Culture=neutral, PublicKeyToken=6d868dff454e6022]])
+2022-12-28 20:43:56.473 +03:00 [DBG] Queueing "Serial":textDocument/didChange request for processing
+2022-12-28 20:43:56.473 +03:00 [DBG] Starting: Processing notification textDocument/didChange
+2022-12-28 20:43:56.473 +03:00 [DBG] Starting: Routing Notification textDocument/didChange
+2022-12-28 20:43:56.473 +03:00 [VRB] Converting params for Notification textDocument/didChange to OmniSharp.Extensions.LanguageServer.Protocol.Models.DidChangeTextDocumentParams
+2022-12-28 20:43:56.484 +03:00 [DBG] Finished: Routing Notification textDocument/didChange in 10ms
+2022-12-28 20:43:56.484 +03:00 [DBG] Finished: Processing notification textDocument/didChange in 10ms
+2022-12-28 20:43:57.458 +03:00 [DBG] Finding descriptors for textDocument/didSave
+2022-12-28 20:43:57.462 +03:00 [VRB] Found attributes 1, ["xml::file:///home/zero/dev/CSharp/Avalonia/ToDoMVVM/ToDo/Views/NewItemView.axaml"]
+2022-12-28 20:43:57.462 +03:00 [VRB] Looking for handler for descriptors textDocument/didSave
+2022-12-28 20:43:57.462 +03:00 [VRB] Checking handler textDocument/didSave:Avalonia.AXAML.LanguageServer.Handlers.TextDocumentHandler
+2022-12-28 20:43:57.462 +03:00 [VRB] Registration options OmniSharp.Extensions.LanguageServer.Protocol.Models.TextDocumentSaveRegistrationOptions
+2022-12-28 20:43:57.462 +03:00 [VRB] Document Selector [**/*.xaml], [**/*.axaml]
+2022-12-28 20:43:57.463 +03:00 [VRB] Handler Selected: Avalonia.AXAML.LanguageServer.Handlers.TextDocumentHandler  via [**/*.xaml], [**/*.axaml] (targeting OmniSharp.Extensions.JsonRpc.IJsonRpcNotificationHandler`1[[OmniSharp.Extensions.LanguageServer.Protocol.Models.DidSaveTextDocumentParams, OmniSharp.Extensions.LanguageProtocol, Version=0.19.0.0, Culture=neutral, PublicKeyToken=6d868dff454e6022]])
+2022-12-28 20:43:57.463 +03:00 [DBG] Queueing "Serial":textDocument/didSave request for processing
+2022-12-28 20:43:57.463 +03:00 [DBG] Starting: Processing notification textDocument/didSave
+2022-12-28 20:43:57.463 +03:00 [DBG] Starting: Routing Notification textDocument/didSave
+2022-12-28 20:43:57.463 +03:00 [VRB] Converting params for Notification textDocument/didSave to OmniSharp.Extensions.LanguageServer.Protocol.Models.DidSaveTextDocumentParams
+2022-12-28 20:43:57.465 +03:00 [DBG] Finished: Routing Notification textDocument/didSave in 1ms
+2022-12-28 20:43:57.465 +03:00 [DBG] Finished: Processing notification textDocument/didSave in 1ms
+2022-12-28 20:44:00.594 +03:00 [DBG] Finding descriptors for textDocument/didChange
+2022-12-28 20:44:00.594 +03:00 [VRB] Found attributes 1, ["xml::file:///home/zero/dev/CSharp/Avalonia/ToDoMVVM/ToDo/Views/NewItemView.axaml"]
+2022-12-28 20:44:00.594 +03:00 [VRB] Looking for handler for descriptors textDocument/didChange
+2022-12-28 20:44:00.594 +03:00 [VRB] Checking handler textDocument/didChange:Avalonia.AXAML.LanguageServer.Handlers.TextDocumentHandler
+2022-12-28 20:44:00.594 +03:00 [VRB] Registration options OmniSharp.Extensions.LanguageServer.Protocol.Models.TextDocumentChangeRegistrationOptions
+2022-12-28 20:44:00.594 +03:00 [VRB] Document Selector [**/*.xaml], [**/*.axaml]
+2022-12-28 20:44:00.595 +03:00 [VRB] Handler Selected: Avalonia.AXAML.LanguageServer.Handlers.TextDocumentHandler  via [**/*.xaml], [**/*.axaml] (targeting OmniSharp.Extensions.JsonRpc.IJsonRpcNotificationHandler`1[[OmniSharp.Extensions.LanguageServer.Protocol.Models.DidChangeTextDocumentParams, OmniSharp.Extensions.LanguageProtocol, Version=0.19.0.0, Culture=neutral, PublicKeyToken=6d868dff454e6022]])
+2022-12-28 20:44:00.595 +03:00 [DBG] Queueing "Serial":textDocument/didChange request for processing
+2022-12-28 20:44:00.595 +03:00 [DBG] Starting: Processing notification textDocument/didChange
+2022-12-28 20:44:00.595 +03:00 [DBG] Starting: Routing Notification textDocument/didChange
+2022-12-28 20:44:00.595 +03:00 [VRB] Converting params for Notification textDocument/didChange to OmniSharp.Extensions.LanguageServer.Protocol.Models.DidChangeTextDocumentParams
+2022-12-28 20:44:00.601 +03:00 [DBG] Finished: Routing Notification textDocument/didChange in 6ms
+2022-12-28 20:44:00.602 +03:00 [DBG] Finished: Processing notification textDocument/didChange in 6ms
+2022-12-28 20:44:00.814 +03:00 [DBG] Finding descriptors for textDocument/didChange
+2022-12-28 20:44:00.814 +03:00 [VRB] Found attributes 1, ["xml::file:///home/zero/dev/CSharp/Avalonia/ToDoMVVM/ToDo/Views/NewItemView.axaml"]
+2022-12-28 20:44:00.814 +03:00 [VRB] Looking for handler for descriptors textDocument/didChange
+2022-12-28 20:44:00.814 +03:00 [VRB] Checking handler textDocument/didChange:Avalonia.AXAML.LanguageServer.Handlers.TextDocumentHandler
+2022-12-28 20:44:00.814 +03:00 [VRB] Registration options OmniSharp.Extensions.LanguageServer.Protocol.Models.TextDocumentChangeRegistrationOptions
+2022-12-28 20:44:00.814 +03:00 [VRB] Document Selector [**/*.xaml], [**/*.axaml]
+2022-12-28 20:44:00.814 +03:00 [VRB] Handler Selected: Avalonia.AXAML.LanguageServer.Handlers.TextDocumentHandler  via [**/*.xaml], [**/*.axaml] (targeting OmniSharp.Extensions.JsonRpc.IJsonRpcNotificationHandler`1[[OmniSharp.Extensions.LanguageServer.Protocol.Models.DidChangeTextDocumentParams, OmniSharp.Extensions.LanguageProtocol, Version=0.19.0.0, Culture=neutral, PublicKeyToken=6d868dff454e6022]])
+2022-12-28 20:44:00.814 +03:00 [DBG] Queueing "Serial":textDocument/didChange request for processing
+2022-12-28 20:44:00.815 +03:00 [DBG] Starting: Processing notification textDocument/didChange
+2022-12-28 20:44:00.815 +03:00 [DBG] Starting: Routing Notification textDocument/didChange
+2022-12-28 20:44:00.815 +03:00 [VRB] Converting params for Notification textDocument/didChange to OmniSharp.Extensions.LanguageServer.Protocol.Models.DidChangeTextDocumentParams
+2022-12-28 20:44:00.815 +03:00 [DBG] Finished: Routing Notification textDocument/didChange in 0ms
+2022-12-28 20:44:00.815 +03:00 [DBG] Finished: Processing notification textDocument/didChange in 0ms
+2022-12-28 20:44:01.264 +03:00 [DBG] Finding descriptors for textDocument/didChange
+2022-12-28 20:44:01.264 +03:00 [VRB] Found attributes 1, ["xml::file:///home/zero/dev/CSharp/Avalonia/ToDoMVVM/ToDo/Views/NewItemView.axaml"]
+2022-12-28 20:44:01.264 +03:00 [VRB] Looking for handler for descriptors textDocument/didChange
+2022-12-28 20:44:01.264 +03:00 [VRB] Checking handler textDocument/didChange:Avalonia.AXAML.LanguageServer.Handlers.TextDocumentHandler
+2022-12-28 20:44:01.264 +03:00 [VRB] Registration options OmniSharp.Extensions.LanguageServer.Protocol.Models.TextDocumentChangeRegistrationOptions
+2022-12-28 20:44:01.264 +03:00 [VRB] Document Selector [**/*.xaml], [**/*.axaml]
+2022-12-28 20:44:01.264 +03:00 [VRB] Handler Selected: Avalonia.AXAML.LanguageServer.Handlers.TextDocumentHandler  via [**/*.xaml], [**/*.axaml] (targeting OmniSharp.Extensions.JsonRpc.IJsonRpcNotificationHandler`1[[OmniSharp.Extensions.LanguageServer.Protocol.Models.DidChangeTextDocumentParams, OmniSharp.Extensions.LanguageProtocol, Version=0.19.0.0, Culture=neutral, PublicKeyToken=6d868dff454e6022]])
+2022-12-28 20:44:01.264 +03:00 [DBG] Queueing "Serial":textDocument/didChange request for processing
+2022-12-28 20:44:01.265 +03:00 [DBG] Starting: Processing notification textDocument/didChange
+2022-12-28 20:44:01.265 +03:00 [DBG] Starting: Routing Notification textDocument/didChange
+2022-12-28 20:44:01.265 +03:00 [VRB] Converting params for Notification textDocument/didChange to OmniSharp.Extensions.LanguageServer.Protocol.Models.DidChangeTextDocumentParams
+2022-12-28 20:44:01.265 +03:00 [DBG] Finished: Routing Notification textDocument/didChange in 0ms
+2022-12-28 20:44:01.265 +03:00 [DBG] Finished: Processing notification textDocument/didChange in 0ms
+2022-12-28 20:44:02.267 +03:00 [DBG] Finding descriptors for textDocument/didSave
+2022-12-28 20:44:02.267 +03:00 [VRB] Found attributes 1, ["xml::file:///home/zero/dev/CSharp/Avalonia/ToDoMVVM/ToDo/Views/NewItemView.axaml"]
+2022-12-28 20:44:02.267 +03:00 [VRB] Looking for handler for descriptors textDocument/didSave
+2022-12-28 20:44:02.267 +03:00 [VRB] Checking handler textDocument/didSave:Avalonia.AXAML.LanguageServer.Handlers.TextDocumentHandler
+2022-12-28 20:44:02.267 +03:00 [VRB] Registration options OmniSharp.Extensions.LanguageServer.Protocol.Models.TextDocumentSaveRegistrationOptions
+2022-12-28 20:44:02.267 +03:00 [VRB] Document Selector [**/*.xaml], [**/*.axaml]
+2022-12-28 20:44:02.267 +03:00 [VRB] Handler Selected: Avalonia.AXAML.LanguageServer.Handlers.TextDocumentHandler  via [**/*.xaml], [**/*.axaml] (targeting OmniSharp.Extensions.JsonRpc.IJsonRpcNotificationHandler`1[[OmniSharp.Extensions.LanguageServer.Protocol.Models.DidSaveTextDocumentParams, OmniSharp.Extensions.LanguageProtocol, Version=0.19.0.0, Culture=neutral, PublicKeyToken=6d868dff454e6022]])
+2022-12-28 20:44:02.267 +03:00 [DBG] Queueing "Serial":textDocument/didSave request for processing
+2022-12-28 20:44:02.267 +03:00 [DBG] Starting: Processing notification textDocument/didSave
+2022-12-28 20:44:02.267 +03:00 [DBG] Starting: Routing Notification textDocument/didSave
+2022-12-28 20:44:02.267 +03:00 [VRB] Converting params for Notification textDocument/didSave to OmniSharp.Extensions.LanguageServer.Protocol.Models.DidSaveTextDocumentParams
+2022-12-28 20:44:02.269 +03:00 [DBG] Finished: Routing Notification textDocument/didSave in 1ms
+2022-12-28 20:44:02.269 +03:00 [DBG] Finished: Processing notification textDocument/didSave in 1ms

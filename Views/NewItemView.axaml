@@ -1,0 +1,14 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="ToDo.Views.NewItemView">
+  <Grid RowDefinitions="*, auto" ColumnDefinitions="*">
+    <TextBox Text="{Binding Name}" Watermark="Введите текст"></TextBox>
+    <StackPanel HorizontalAlignment="Center" Grid.Row="1" Orientation="Horizontal">
+      <Button Command="{Binding Cancel}">Отмена</Button>
+      <Button Command="{Binding Ok}">Ok</Button>
+    </StackPanel>
+  </Grid>
+</UserControl>

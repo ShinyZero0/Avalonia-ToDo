@@ -10,7 +10,7 @@ namespace ToDo.Views
         {
             InitializeComponent();
             this.Closing += delegate { ((MainWindowViewModel)this.DataContext).Save(); };
-    }
         }
+    }
         
 }

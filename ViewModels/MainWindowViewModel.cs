@@ -40,10 +40,7 @@ namespace ToDo.ViewModels
             Content = vm;
 
         }
-        public void RemoveItem()
-        {
-            Items.Items.Remove(Items.Items.ToList().Find(x => x.Name == Items.ItemSelected.Name));
-        }
+        
         public void Save()
         {
             this.DB.Save(Items.Items);

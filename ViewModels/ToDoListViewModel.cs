@@ -2,6 +2,8 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using ToDo.Models;
 using ReactiveUI;
+using System.Reactive;
+using System.Linq;
 
 namespace ToDo.ViewModels
 {
@@ -11,6 +13,7 @@ namespace ToDo.ViewModels
         public ToDoListViewModel(IEnumerable<ToDoItem> items)
         {
             Items = new ObservableCollection<ToDoItem>(items);
+            
         }
         ToDoItem itemSelected;
         public ToDoItem ItemSelected
@@ -22,7 +25,12 @@ namespace ToDo.ViewModels
             set
             {
                 this.RaiseAndSetIfChanged(ref itemSelected, value);
-            }       
+            }
+            
+        }
+        public void RemoveItem()
+        {
+            Items.Remove(Items.ToList().Find(x => x.Name == ItemSelected.Name));
         }   
     }
 }

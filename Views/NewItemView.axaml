@@ -7,8 +7,8 @@
   <Grid RowDefinitions="*, auto" ColumnDefinitions="*">
     <TextBox Text="{Binding Name}" Watermark="Введите текст"></TextBox>
     <StackPanel HorizontalAlignment="Center" Grid.Row="1" Orientation="Horizontal">
-      <Button Command="{Binding Cancel}">Отмена</Button>
-      <Button Command="{Binding Ok}">Ok</Button>
+      <Button Command="{Binding Ok}" Margin="5">Ok</Button>
+      <Button Command="{Binding Cancel}" Margin="5">Отмена</Button>
     </StackPanel>
   </Grid>
 </UserControl>

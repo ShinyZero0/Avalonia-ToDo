@@ -11,6 +11,7 @@
     <Folder Include="Models\" />
     <AvaloniaResource Include="Assets\**" />
     <None Remove=".gitignore" />
+    <None Remove="data.json" />
   </ItemGroup>
   <ItemGroup>
 	<!--This helps with theme dll-s trimming.
@@ -24,8 +25,12 @@
     <PackageReference Include="Avalonia.Desktop" Version="0.10.18" />
     <!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
     <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="0.10.18" />
-	<PackageReference Include="Avalonia.ReactiveUI" Version="0.10.18" />
-	<PackageReference Include="newtonsoft.json" Version="13.0.2" />
+	  <PackageReference Include="Avalonia.ReactiveUI" Version="0.10.18" />
+	  <PackageReference Include="newtonsoft.json" Version="13.0.2" />
+	  <PackageReference Include="nsubsys" Version="1.0.0">
+	  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+	  <PrivateAssets>all</PrivateAssets>
+	</PackageReference>
 	<PackageReference Include="XamlNameReferenceGenerator" Version="1.3.4" />
   </ItemGroup>
 </Project>

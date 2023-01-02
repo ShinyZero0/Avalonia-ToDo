@@ -13,8 +13,11 @@
       </ListBox.ItemTemplate>
     </ListBox>
     <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Grid.Row="1">
-      <Button HorizontalAlignment="Center" Command="{Binding $parent[Window].DataContext.NewItem}">Добавить</Button>
-      <Button HorizontalAlignment="Center" IsEnabled="{Binding ItemSelected, Converter={x:Static ObjectConverters.IsNotNull}}" Command="{Binding RemoveItem}">Удалить</Button>
+      <Button HorizontalAlignment="Center" Command="{Binding $parent[Window].DataContext.NewItem}" Margin="5">Добавить</Button>
+      <Button HorizontalAlignment="Center" IsEnabled="{Binding ItemSelected, Converter={x:Static ObjectConverters.IsNotNull}}" 
+        Command="{Binding RemoveItem}" Margin="5">
+        Удалить
+        </Button>
     </StackPanel>
     
   </Grid>

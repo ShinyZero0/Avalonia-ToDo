@@ -31,6 +31,7 @@ namespace ToDo.ViewModels
         public void RemoveItem()
         {
             Items.Remove(Items.ToList().Find(x => x.Name == ItemSelected.Name));
-        }   
+        }
+        
     }
 }

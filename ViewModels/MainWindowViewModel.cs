@@ -19,7 +19,7 @@ namespace ToDo.ViewModels
         public ToDoListViewModel Items { get; }
         public MainWindowViewModel(DataBase db)
         {
-            Content = Items = new ToDoListViewModel(db.Get());
+            Content = Items = new ToDoListViewModel(db.items);
             this.DB = db;
         }
         public void NewItem()
@@ -38,12 +38,12 @@ namespace ToDo.ViewModels
             }
             );
             Content = vm;
-
         }
         
         public void Save()
         {
-            this.DB.Save(Items.Items);
+            this.DB.items = Items.Items;
+            Filer.Save(this.DB);
         }
     }
 }

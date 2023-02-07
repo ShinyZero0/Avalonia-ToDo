@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using System.Linq;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using Newtonsoft.Json;
@@ -7,24 +8,30 @@ namespace ToDo.Models
 {
     public class DataBase
     {
-        public IEnumerable<ToDoItem> Get()
+        public DataBase()
         {
-            if (File.Exists(@"data.json"))
+            items = new List<ToDoItem>();
+            inTimeCnt = 0;
+        }
+        public IEnumerable<ToDoItem> items { get; set; }
+        public int inTimeCnt 
+        {
+            get
             {
-                using (var jsonSR = new StreamReader(@"data.json"))
-                {
-                    return  JsonConvert.DeserializeObject<List<ToDoItem>>(jsonSR.ReadToEnd());
-                }
+                int cnt = 0;
+                foreach (var item in items)
+                    if(item.IsDone == true)
+                    {
+                        cnt++;
+                    }
+                return cnt;
             }
-            else return new List<ToDoItem>();
+            set
+            {
+                
+            }
         }
-        public void Save(IEnumerable<ToDoItem> items)
-        {
-            using (var jsonSW = new StreamWriter(@"data.json"))
-                {
-                    jsonSW.Write(JsonConvert.SerializeObject(items, Formatting.Indented));
-                }
-        }
+
 
     }
 

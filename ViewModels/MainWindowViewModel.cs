@@ -1,5 +1,4 @@
 ﻿using ReactiveUI;
-using System.Collections.Generic;
 using System.Reactive.Linq;
 using System.Linq;
 using ToDo.Models;

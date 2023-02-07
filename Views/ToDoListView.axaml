@@ -5,7 +5,6 @@
              mc:Ignorable="d" d:DesignWidth="300" d:DesignHeight="450"
              x:Class="ToDo.Views.ToDoListView">
   <Grid RowDefinitions="*, auto" ColumnDefinitions="*">
-    <!-- <TextBlock Text="{Binding Items, Converter={x:Static ObjectConverters.IsNotNull}}"></TextBlock> -->
     <ListBox Grid.Row="0" SelectedItem="{Binding ItemSelected}" Items="{Binding Items}" SelectionMode="Single"> 
       <ListBox.ItemTemplate>
         <DataTemplate>

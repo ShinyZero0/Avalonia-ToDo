@@ -1,5 +1,4 @@
 using Avalonia.Controls;
-using Avalonia.Interactivity;
 using ToDo.ViewModels;
 
 namespace ToDo.Views

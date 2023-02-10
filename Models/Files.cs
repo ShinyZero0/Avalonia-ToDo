@@ -3,7 +3,7 @@ using System.IO;
 
 namespace ToDo.Models;
 
-public class Filer
+public class Files
 {
     public static void Save(DataBase dataBase)
     {

@@ -9,7 +9,7 @@ namespace ToDo.Models
             inTimeCnt = 0;
         }
         public IEnumerable<ToDoItem> items { get; set; }
-        public int inTimeCnt 
+        public int inTimeCnt
         {
             get
             {
@@ -23,7 +23,7 @@ namespace ToDo.Models
             }
             set
             {
-                
+
             }
         }
 

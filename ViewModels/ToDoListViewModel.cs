@@ -1,9 +1,11 @@
 using System.Collections.Generic;
+using System.Globalization;
 using System.Collections.ObjectModel;
 using ToDo.Models;
 using ReactiveUI;
 using System.Reactive;
 using System.Linq;
+using System;
 
 namespace ToDo.ViewModels
 {
@@ -13,7 +15,6 @@ namespace ToDo.ViewModels
         public ToDoListViewModel(IEnumerable<ToDoItem> items)
         {
             Items = new ObservableCollection<ToDoItem>(items);
-            
         }
         ToDoItem itemSelected;
         public ToDoItem ItemSelected

@@ -1,24 +1,28 @@
 <UserControl xmlns="https://github.com/avaloniaui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d" d:DesignWidth="300" d:DesignHeight="450"
-             x:Class="ToDo.Views.ToDoListView">
-  <Grid RowDefinitions="*, auto" ColumnDefinitions="*">
-    <ListBox Grid.Row="0" SelectedItem="{Binding ItemSelected}" Items="{Binding Items}" SelectionMode="Single"> 
-      <ListBox.ItemTemplate>
-        <DataTemplate>
-          <CheckBox Margin="5" IsChecked="{Binding IsDone}" Content="{Binding Name}"/>
-        </DataTemplate>
-      </ListBox.ItemTemplate>
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:local="clr-namespace:ToDo.Views"
+    mc:Ignorable="d" d:DesignWidth="300" d:DesignHeight="450"
+    x:Class="ToDo.Views.ToDoListView">
+<UserControl.Resources>
+    <local:ItemsCounter x:Key="ItemsCounter"/>
+</UserControl.Resources>
+
+<Grid RowDefinitions="auto, *, auto" ColumnDefinitions="*">
+    <TextBlock Grid.Row="0" Text="{Binding Items, Converter={StaticResource ItemsCounter}}"/>
+    <ListBox Grid.Row="1" SelectedItem="{Binding ItemSelected}" Items="{Binding Items}" SelectionMode="Single"> 
+        <ListBox.ItemTemplate>
+            <DataTemplate>
+                <CheckBox Margin="5" IsChecked="{Binding IsDone}" Content="{Binding Name}"/>
+            </DataTemplate>
+        </ListBox.ItemTemplate>
     </ListBox>
-    <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Grid.Row="1">
-      <Button HorizontalAlignment="Center" Command="{Binding $parent[Window].DataContext.NewItem}" Margin="5">Добавить</Button>
-      <Button HorizontalAlignment="Center" IsEnabled="{Binding ItemSelected, Converter={x:Static ObjectConverters.IsNotNull}}" 
-        Command="{Binding RemoveItem}" Margin="5">
-        Удалить
-        </Button>
-    </StackPanel>
-    
-  </Grid>
+    <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Grid.Row="2">
+        <Button HorizontalAlignment="Center" Command="{Binding $parent[Window].DataContext.NewItem}" Margin="5">Добавить</Button>
+        <Button HorizontalAlignment="Center" IsEnabled="{Binding ItemSelected, Converter={x:Static ObjectConverters.IsNotNull}}" 
+            Command="{Binding RemoveItem}" Margin="5">Удалить</Button>
+</StackPanel>
+
+</Grid>
 </UserControl>

@@ -18,7 +18,7 @@ namespace ToDo
         {
             if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
             {
-                var db = Filer.Get();
+                var db = Files.Get();
                 desktop.MainWindow = new MainWindow
                 {
                     DataContext = new MainWindowViewModel(db),

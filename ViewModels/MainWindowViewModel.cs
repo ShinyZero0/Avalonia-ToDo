@@ -8,6 +8,7 @@ namespace ToDo.ViewModels
 {
     public class MainWindowViewModel : ViewModelBase
     {
+        
         DataBase DB;
         ViewModelBase content;
         public ViewModelBase Content
@@ -42,7 +43,7 @@ namespace ToDo.ViewModels
         public void Save()
         {
             this.DB.items = Items.Items;
-            Filer.Save(this.DB);
+            Files.Save(this.DB);
         }
     }
 }

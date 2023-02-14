@@ -3,8 +3,10 @@ using System.Globalization;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using Avalonia.Data.Converters;
+using Avalonia.Collections;
 using ToDo.Models;
 using System.Linq;
+using Avalonia.Controls;
 
 namespace ToDo.Views;
 public class ItemsCounter : IValueConverter
@@ -14,11 +16,11 @@ public class ItemsCounter : IValueConverter
                            object? parameter,
                            CultureInfo culture)
     {
-        var list = (ObservableCollection<ToDoItem>) value;
+        var list = (IEnumerable<ToDoItem>)value;
         int cnt = 0;
         foreach (var item in list)
         {
-            if (item.IsDone == true)
+            if (((ToDoItem)item).IsDone == true)
             {
                 cnt++;
             }

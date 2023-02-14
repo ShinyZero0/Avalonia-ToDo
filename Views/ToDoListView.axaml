@@ -11,7 +11,7 @@
 
 <Grid RowDefinitions="auto, *, auto" ColumnDefinitions="*">
     <TextBlock Grid.Row="0" Text="{Binding Items, Converter={StaticResource ItemsCounter}}"/>
-    <ListBox Grid.Row="1" SelectedItem="{Binding ItemSelected}" Items="{Binding Items}" SelectionMode="Single"> 
+    <ListBox x:Name="TheListBox" Grid.Row="1" SelectedItem="{Binding ItemSelected}" Items="{Binding Items}" SelectionMode="Single"> 
         <ListBox.ItemTemplate>
             <DataTemplate>
                 <CheckBox Margin="5" IsChecked="{Binding IsDone}" Content="{Binding Name}"/>

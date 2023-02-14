@@ -1,32 +1,28 @@
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
-using ToDo.ViewModels;
-using ToDo.Views;
-using ToDo.Models;
+using actualToDo.ViewModels;
+using actualToDo.Views;
 
-namespace ToDo
+namespace actualToDo;
+
+public partial class App : Application
 {
-    public partial class App : Application
+    public override void Initialize()
     {
-        public override void Initialize()
-        {
-            AvaloniaXamlLoader.Load(this);
-        }
+        AvaloniaXamlLoader.Load(this);
+    }
 
-        public override void OnFrameworkInitializationCompleted()
+    public override void OnFrameworkInitializationCompleted()
+    {
+        if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
-            if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
+            desktop.MainWindow = new MainWindow
             {
-                var db = Files.Get();
-                desktop.MainWindow = new MainWindow
-                {
-                    DataContext = new MainWindowViewModel(db),
-                };
-                
-            }
-
-            base.OnFrameworkInitializationCompleted();
+                DataContext = new MainWindowViewModel(),
+            };
         }
+
+        base.OnFrameworkInitializationCompleted();
     }
 }

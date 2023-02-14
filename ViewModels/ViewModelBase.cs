@@ -1,8 +1,7 @@
 ﻿using ReactiveUI;
 
-namespace ToDo.ViewModels
+namespace actualToDo.ViewModels;
+
+public class ViewModelBase : ReactiveObject
 {
-    public class ViewModelBase : ReactiveObject
-    {
-    }
 }

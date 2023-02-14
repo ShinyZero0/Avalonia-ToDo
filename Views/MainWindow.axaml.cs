@@ -1,15 +1,11 @@
 using Avalonia.Controls;
-using ToDo.ViewModels;
 
-namespace ToDo.Views
+namespace actualToDo.Views;
+
+public partial class MainWindow : Window
 {
-    public partial class MainWindow : Window
+    public MainWindow()
     {
-        public MainWindow()
-        {
-            InitializeComponent();
-            this.Closing += delegate { ((MainWindowViewModel)this.DataContext).Save(); };
-        }
+        InitializeComponent();
     }
-        
 }

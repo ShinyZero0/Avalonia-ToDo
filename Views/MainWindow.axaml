@@ -11,6 +11,13 @@
 <StackPanel VerticalAlignment="Top" HorizontalAlignment="Center">
     <TextBox Text="{Binding Greeting}" />
     <TextBlock x:Name="TheTextBlock" Text="{Binding Greeting}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+    <ListBox Items="{Binding ReadOnlyObservableCollection}">
+        <ListBox.ItemTemplate>
+            <DataTemplate>
+                    <TextBlock Text="{Binding Name}"/>
+                </DataTemplate>
+        </ListBox.ItemTemplate>
+    </ListBox>
 </StackPanel>
 
 </Window>

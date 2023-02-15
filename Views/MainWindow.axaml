@@ -8,12 +8,9 @@
     Icon="/Assets/avalonia-logo.ico"
     Title="actualToDo">
 
-<Design.DataContext>
-    <!-- This only sets the DataContext for the previewer in an IDE,
-    to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
-    <vm:MainWindowViewModel/>
-</Design.DataContext>
-
-<TextBlock Text="{Binding Greeting}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+<StackPanel VerticalAlignment="Top" HorizontalAlignment="Center">
+    <TextBox Text="{Binding Greeting}" />
+    <TextBlock x:Name="TheTextBlock" Text="{Binding Greeting}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+</StackPanel>
 
 </Window>

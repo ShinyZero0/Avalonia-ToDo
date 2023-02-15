@@ -5,17 +5,19 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
     x:Class="actualToDo.Views.MainWindow"
+    x:DataType="vm:MainWindowViewModel"
+    x:CompileBindings="True"
     Icon="/Assets/avalonia-logo.ico"
-    Title="actualToDo">
+    Title="Список задач">
 
 <StackPanel VerticalAlignment="Top" HorizontalAlignment="Center">
     <TextBox Text="{Binding Greeting}" />
     <TextBlock x:Name="TheTextBlock" Text="{Binding Greeting}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-    <ListBox Items="{Binding ReadOnlyObservableCollection}">
+    <ListBox Items="{Binding List}">
         <ListBox.ItemTemplate>
             <DataTemplate>
-                    <TextBlock Text="{Binding Name}"/>
-                </DataTemplate>
+                <TextBlock Text="{Binding Name}"/>
+            </DataTemplate>
         </ListBox.ItemTemplate>
     </ListBox>
 </StackPanel>

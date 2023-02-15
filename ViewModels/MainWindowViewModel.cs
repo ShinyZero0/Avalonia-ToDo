@@ -9,12 +9,18 @@ using ToDo.Models;
 
 namespace actualToDo.ViewModels;
 
-public class MainWindowViewModel : ViewModelBase // ReactiveObject, IActivatableViewModel
+public class MainWindowViewModel : ReactiveObject, IActivatableViewModel
 {
     public MainWindowViewModel()
     {
+        Activator = new ViewModelActivator();
+        this.WhenActivated((CompositeDisposable disposables) =>
+        {
+            Disposable.Create(() => { })
+                      .DisposeWith(disposables);
+        });
+
         var item = new ToDoItem("Name", "Content");
-        /* Activator = new ViewModelActivator(); */
         _sourceList = new SourceList<ToDoItem>();
 
         _sourceList.Add(item);
@@ -27,12 +33,6 @@ public class MainWindowViewModel : ViewModelBase // ReactiveObject, IActivatable
 
         _sourceList.Add(item);
 
-        /* this.WhenActivated((CompositeDisposable disposables) => */
-        /* { */
-        /*     Disposable.Create(() => { }) */
-        /*               .DisposeWith(disposables); */
-
-        /* }); */
 
     }
     private string _greeting;

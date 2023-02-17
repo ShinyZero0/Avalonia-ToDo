@@ -11,19 +11,28 @@
     Icon="/Assets/avalonia-logo.ico"
     Title="Список задач">
 
-<StackPanel VerticalAlignment="Top" HorizontalAlignment="Center">
-    <!-- <TextBox Text="{Binding Greeting}" /> -->
-    <!-- <TextBlock x:Name="TheTextBlock" Text="{Binding Greeting}" HorizontalAlignment="Center" VerticalAlignment="Center"/> -->
-    <ListBox Items="{Binding Colle}">
-        <ListBox.ItemTemplate>
-            <DataTemplate>
-                <TextBlock Text="{Binding Name}"/>
-            </DataTemplate>
-        </ListBox.ItemTemplate>
-    </ListBox>
-    <Button Command="{Binding NewItemCommand}">
-        Добавить задачу
-    </Button>
-</StackPanel>
+
+<Grid ColumnDefinitions="*" RowDefinitions="*, auto">
+    <ScrollViewer Grid.Row="0">
+        <ListBox SelectedIndex="{Binding SelectedIndex}" Items="{Binding Colle}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <CheckBox IsChecked="{Binding IsDone}">
+                        <TextBlock TextWrapping="Wrap" Text="{Binding Name}"/>
+                    </CheckBox>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+    </ScrollViewer>
+
+    <StackPanel Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Center">
+        <Button Command="{Binding NewItemCommand}">
+            Добавить
+        </Button>
+        <Button Command="{Binding RemoveItemCommand}">
+            Удалить
+        </Button>
+    </StackPanel>
+</Grid>
 
 </Window>

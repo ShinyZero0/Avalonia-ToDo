@@ -24,6 +24,7 @@ public class MainWindowViewModel : ReactiveObject, IActivatableViewModel
                 _sourceList.Add(result);
             }
         });
+        RemoveItemCommand = ReactiveCommand.Create(() => _sourceList.RemoveAt(SelectedIndex));
         _sourceList = new SourceList<ToDoItem>();
 
         var item = new ToDoItem("Name", "Content");
@@ -45,19 +46,23 @@ public class MainWindowViewModel : ReactiveObject, IActivatableViewModel
         );
     }
 
-    public IReactiveCommand NewItemCommand { get; }
-    public Interaction<NewItemViewModel, ToDoItem?> ShowDialog { get; set; }
-    private string _input;
-    public string Input
+
+    private int _selectedIndex;
+    public int SelectedIndex
     {
-        get => _input;
-        set => this.RaiseAndSetIfChanged(ref _input, value);
+        get => _selectedIndex;
+        set => this.RaiseAndSetIfChanged(ref _selectedIndex, value);
     }
 
     private SourceList<ToDoItem> _sourceList;
 
     private readonly ReadOnlyObservableCollection<ToDoItem> _colle;
     public ReadOnlyObservableCollection<ToDoItem> Colle => _colle;
+
+    public IReactiveCommand NewItemCommand { get; }
+    public IReactiveCommand RemoveItemCommand { get; }
+
+    public Interaction<NewItemViewModel, ToDoItem?> ShowDialog { get; set; }
 
     public ViewModelActivator Activator { get; }
 }

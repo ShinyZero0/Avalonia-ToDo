@@ -10,10 +10,12 @@
     x:Class="actualToDo.Views.NewItemView"
     Title="Добавить задачу">
 
-<StackPanel>
-    <TextBox AcceptsReturn="True" TextWrapping="Wrap" Text="{Binding Name}"/>
-    <Button Content="Добавить" Command="{Binding AcceptNewItemCommand}"/>
-    <Button Content="Отмена" Command="{Binding CancelCommand}"/>
-</StackPanel>
+<Grid ColumnDefinitions="*" RowDefinitions="*, auto">
+    <TextBox Grid.Row="0" AcceptsReturn="True" TextWrapping="Wrap" Text="{Binding Name}"/>
+    <StackPanel Grid.Row="1" Orientation="Horizontal">
+        <Button Content="Добавить" Command="{Binding AcceptNewItemCommand}"/>
+        <Button Content="Отмена" Command="{Binding CancelCommand}"/>
+    </StackPanel>
+</Grid>
 
 </Window>

@@ -4,6 +4,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+    Width="400" Height="600"
     x:Class="actualToDo.Views.MainWindow"
     x:DataType="vm:MainWindowViewModel"
     x:CompileBindings="True"
@@ -11,15 +12,18 @@
     Title="Список задач">
 
 <StackPanel VerticalAlignment="Top" HorizontalAlignment="Center">
-    <TextBox Text="{Binding Greeting}" />
-    <TextBlock x:Name="TheTextBlock" Text="{Binding Greeting}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-    <ListBox Items="{Binding List}">
+    <!-- <TextBox Text="{Binding Greeting}" /> -->
+    <!-- <TextBlock x:Name="TheTextBlock" Text="{Binding Greeting}" HorizontalAlignment="Center" VerticalAlignment="Center"/> -->
+    <ListBox Items="{Binding Colle}">
         <ListBox.ItemTemplate>
             <DataTemplate>
                 <TextBlock Text="{Binding Name}"/>
             </DataTemplate>
         </ListBox.ItemTemplate>
     </ListBox>
+    <Button Command="{Binding NewItemCommand}">
+        Добавить задачу
+    </Button>
 </StackPanel>
 
 </Window>

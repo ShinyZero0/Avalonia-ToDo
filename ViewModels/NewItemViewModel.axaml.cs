@@ -20,5 +20,5 @@ public partial class NewItemViewModel : ViewModelBase
         get => _name;
         set => this.RaiseAndSetIfChanged(ref _name, value);
     }
-    public ReactiveCommand<Unit, ToDoItem?> AcceptNewItemCommand { get; }
+    public ReactiveCommand<Unit, ToDoItem> AcceptNewItemCommand { get; }
 }

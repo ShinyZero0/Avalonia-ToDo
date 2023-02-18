@@ -1,11 +1,9 @@
 ﻿using System;
 using ReactiveUI;
 using System.Collections.ObjectModel;
-using Avalonia.ReactiveUI;
 using DynamicData;
 using System.Reactive.Disposables;
 using System.Reactive.Linq;
-using System.Reactive;
 using ToDo.Models;
 
 namespace ToDo.ViewModels;
@@ -42,12 +40,11 @@ public class MainWindowViewModel : ReactiveObject, IActivatableViewModel
 
         RemoveItemCommand = ReactiveCommand.Create(() => _sourceList.RemoveAt(SelectedIndex));
 
-
         Activator = new ViewModelActivator();
         this.WhenActivated(
             (CompositeDisposable disposables) =>
             {
-                Disposable.Create(() => { }).DisposeWith(disposables);
+                Disposable.Create(() => { this.SaveData(); }).DisposeWith(disposables);
             }
         );
     }

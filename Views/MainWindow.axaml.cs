@@ -13,7 +13,6 @@ public partial class MainWindow : ReactiveWindow<MainWindowViewModel>
     {
         InitializeComponent();
         this.WhenActivated(d => d(ViewModel.ShowDialog.RegisterHandler(DoShowDialogAsync)));
-        this.Closing += delegate {((MainWindowViewModel)this.DataContext).SaveData();};
     }
 
     private async Task DoShowDialogAsync(

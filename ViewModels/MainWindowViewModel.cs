@@ -44,7 +44,12 @@ public class MainWindowViewModel : ReactiveObject, IActivatableViewModel
         this.WhenActivated(
             (CompositeDisposable disposables) =>
             {
-                Disposable.Create(() => { this.SaveData(); }).DisposeWith(disposables);
+                Disposable
+                    .Create(() =>
+                    {
+                        this.SaveData();
+                    })
+                    .DisposeWith(disposables);
             }
         );
     }
@@ -63,6 +68,7 @@ public class MainWindowViewModel : ReactiveObject, IActivatableViewModel
 
     public IReactiveCommand NewItemCommand { get; }
     public IReactiveCommand RemoveItemCommand { get; }
+
     public void SaveData()
     {
         this.DB.Items = this._sourceList.Items;

@@ -1,10 +1,10 @@
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
-using actualToDo.ViewModels;
-using actualToDo.Views;
+using ToDo.ViewModels;
+using ToDo.Views;
 
-namespace actualToDo;
+namespace ToDo;
 
 public partial class App : Application
 {

@@ -2,7 +2,7 @@
 using Avalonia.ReactiveUI;
 using System;
 
-namespace actualToDo;
+namespace ToDo;
 
 class Program
 {

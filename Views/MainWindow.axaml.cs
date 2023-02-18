@@ -1,11 +1,11 @@
 using Avalonia.Controls;
-using actualToDo.ViewModels;
+using ToDo.ViewModels;
 using System.Threading.Tasks;
 using Avalonia.ReactiveUI;
 using ReactiveUI;
 using ToDo.Models;
 
-namespace actualToDo.Views;
+namespace ToDo.Views;
 
 public partial class MainWindow : ReactiveWindow<MainWindowViewModel>
 {
@@ -13,6 +13,7 @@ public partial class MainWindow : ReactiveWindow<MainWindowViewModel>
     {
         InitializeComponent();
         this.WhenActivated(d => d(ViewModel.ShowDialog.RegisterHandler(DoShowDialogAsync)));
+        this.Closing += delegate {((MainWindowViewModel)this.DataContext).SaveData();};
     }
 
     private async Task DoShowDialogAsync(

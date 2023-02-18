@@ -1,10 +1,10 @@
 using System;
 using Avalonia.Controls;
-using actualToDo.ViewModels;
+using ToDo.ViewModels;
 using Avalonia.ReactiveUI;
 using ReactiveUI;
 
-namespace actualToDo.Views;
+namespace ToDo.Views;
 
 public partial class NewItemView : ReactiveWindow<NewItemViewModel>
 {

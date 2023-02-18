@@ -5,16 +5,31 @@ using Avalonia.ReactiveUI;
 using DynamicData;
 using System.Reactive.Disposables;
 using System.Reactive.Linq;
-using ToDo.Models;
 using System.Reactive;
+using ToDo.Models;
 
-namespace actualToDo.ViewModels;
+namespace ToDo.ViewModels;
 
 public class MainWindowViewModel : ReactiveObject, IActivatableViewModel
 {
     public MainWindowViewModel()
     {
+        DB = Saver.Get();
+        _sourceList = new SourceList<ToDoItem>();
+        _sourceList
+            .Connect()
+            .ObserveOn(RxApp.MainThreadScheduler)
+            .Bind(out _colle)
+            .DisposeMany()
+            .Subscribe();
+
+        foreach (ToDoItem item in DB.Items)
+        {
+            _sourceList.Add(item);
+        }
+
         ShowDialog = new Interaction<NewItemViewModel, ToDoItem>();
+
         NewItemCommand = ReactiveCommand.CreateFromTask(async () =>
         {
             var adder = new NewItemViewModel();
@@ -24,18 +39,9 @@ public class MainWindowViewModel : ReactiveObject, IActivatableViewModel
                 _sourceList.Add(result);
             }
         });
+
         RemoveItemCommand = ReactiveCommand.Create(() => _sourceList.RemoveAt(SelectedIndex));
-        _sourceList = new SourceList<ToDoItem>();
 
-        var item = new ToDoItem("Name", "Content");
-        _sourceList.Add(item);
-
-        _sourceList
-            .Connect()
-            .ObserveOn(RxApp.MainThreadScheduler)
-            .Bind(out _colle)
-            .DisposeMany()
-            .Subscribe();
 
         Activator = new ViewModelActivator();
         this.WhenActivated(
@@ -45,7 +51,6 @@ public class MainWindowViewModel : ReactiveObject, IActivatableViewModel
             }
         );
     }
-
 
     private int _selectedIndex;
     public int SelectedIndex
@@ -61,7 +66,18 @@ public class MainWindowViewModel : ReactiveObject, IActivatableViewModel
 
     public IReactiveCommand NewItemCommand { get; }
     public IReactiveCommand RemoveItemCommand { get; }
+    public void SaveData()
+    {
+        this.DB.Items = this._sourceList.Items;
+        Saver.Save(DB);
+    }
 
+    private DataBase _db;
+    public DataBase DB
+    {
+        get => _db;
+        set => _db = value;
+    }
     public Interaction<NewItemViewModel, ToDoItem?> ShowDialog { get; set; }
 
     public ViewModelActivator Activator { get; }

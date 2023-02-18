@@ -5,7 +5,7 @@ using Avalonia.Markup.Xaml;
 using ToDo.Models;
 using System.Reactive;
 
-namespace actualToDo.ViewModels;
+namespace ToDo.ViewModels;
 
 public partial class NewItemViewModel : ViewModelBase
 {

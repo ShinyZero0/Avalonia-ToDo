@@ -11,9 +11,9 @@
     Title="Добавить задачу">
 
 <Grid ColumnDefinitions="*" RowDefinitions="*, auto">
-    <TextBox Grid.Row="0" AcceptsReturn="True" TextWrapping="Wrap" Text="{Binding Name}"/>
+    <TextBox x:Name="InputBox" Grid.Row="0" AcceptsReturn="True" TextWrapping="Wrap" Text="{Binding Name}"/>
     <StackPanel Grid.Row="1" Orientation="Horizontal">
-        <Button Content="Добавить" Command="{Binding AcceptNewItemCommand}"/>
+        <Button IsEnabled="{Binding #InputBox.Text, Converter={x:Static StringConverters.IsNotNullOrEmpty}}" Content="Добавить" Command="{Binding AcceptNewItemCommand}"/>
         <Button Content="Отмена" Command="{Binding CancelCommand}"/>
     </StackPanel>
 </Grid>

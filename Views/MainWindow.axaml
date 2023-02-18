@@ -14,7 +14,7 @@
 
 <Grid ColumnDefinitions="*" RowDefinitions="*, auto">
     <ScrollViewer Grid.Row="0">
-        <ListBox SelectedIndex="{Binding SelectedIndex}" Items="{Binding Colle}">
+        <ListBox x:Name="TheListBox" SelectedIndex="{Binding SelectedIndex}" Items="{Binding Colle}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <CheckBox IsChecked="{Binding IsDone}">
@@ -29,7 +29,7 @@
         <Button Command="{Binding NewItemCommand}">
             Добавить
         </Button>
-        <Button Command="{Binding RemoveItemCommand}">
+        <Button Command="{Binding RemoveItemCommand}" IsEnabled="{Binding #TheListBox.SelectedItem, Converter={x:Static ObjectConverters.IsNotNull}}">
             Удалить
         </Button>
     </StackPanel>

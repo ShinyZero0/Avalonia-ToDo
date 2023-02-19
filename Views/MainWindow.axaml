@@ -13,20 +13,9 @@
     Title="Список задач">
 
 <Window.Resources>
-    <local:DoneCounter x:Key="DoneCounter"/>
 </Window.Resources>
 
 <Grid ColumnDefinitions="*" RowDefinitions="auto, *, auto">
-    <!-- <TextBlock Grid.Row="0" Text="{Binding Colle, Converter={StaticResource DoneCounter}}"/> -->
-    <ListBox Grid.Row="0" Items="{Binding Colle}">
-        <ListBox.ItemTemplate>
-            <DataTemplate>
-                <CheckBox IsChecked="{Binding IsDone}">
-                    <TextBlock TextWrapping="Wrap" Text="{Binding Name}"/>
-                </CheckBox>
-            </DataTemplate>
-        </ListBox.ItemTemplate>
-    </ListBox>
     <ScrollViewer Grid.Row="1">
         <ListBox x:Name="TheListBox" SelectedIndex="{Binding SelectedIndex}" Items="{Binding Colle}">
             <ListBox.ItemTemplate>

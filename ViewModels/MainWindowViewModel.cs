@@ -13,20 +13,21 @@ public class MainWindowViewModel : ReactiveObject, IActivatableViewModel
     public MainWindowViewModel()
     {
         DB = Saver.Get();
-        _sourceList = new SourceList<ToDoItem>();
+        _sourceList = new SourceList<ItemViewModel>();
+        foreach (ToDoItem item in DB.Items)
+        {
+            _sourceList.Add(new ItemViewModel(item));
+        }
+
         _sourceList
             .Connect()
             .ObserveOn(RxApp.MainThreadScheduler)
+            /* .AutoRefreshOnObservable(item => item.WhenAnyValue(x => x.IsDone)) */
             .Bind(out _colle)
             .DisposeMany()
             .Subscribe();
 
-        foreach (ToDoItem item in DB.Items)
-        {
-            _sourceList.Add(item);
-        }
-
-        ShowDialog = new Interaction<NewItemViewModel, ToDoItem>();
+        ShowDialog = new Interaction<NewItemViewModel, ItemViewModel>();
 
         NewItemCommand = ReactiveCommand.CreateFromTask(async () =>
         {
@@ -61,17 +62,17 @@ public class MainWindowViewModel : ReactiveObject, IActivatableViewModel
         set => this.RaiseAndSetIfChanged(ref _selectedIndex, value);
     }
 
-    private SourceList<ToDoItem> _sourceList;
+    private SourceList<ItemViewModel> _sourceList;
 
-    private readonly ReadOnlyObservableCollection<ToDoItem> _colle;
-    public ReadOnlyObservableCollection<ToDoItem> Colle => _colle;
+    private readonly ReadOnlyObservableCollection<ItemViewModel> _colle;
+    public ReadOnlyObservableCollection<ItemViewModel> Colle => _colle;
 
     public IReactiveCommand NewItemCommand { get; }
     public IReactiveCommand RemoveItemCommand { get; }
 
     public void SaveData()
     {
-        this.DB.Items = this._sourceList.Items;
+        /* this.DB.Items = this._sourceList.Items; */
         Saver.Save(DB);
     }
 
@@ -81,7 +82,7 @@ public class MainWindowViewModel : ReactiveObject, IActivatableViewModel
         get => _db;
         set => _db = value;
     }
-    public Interaction<NewItemViewModel, ToDoItem?> ShowDialog { get; set; }
+    public Interaction<NewItemViewModel, ItemViewModel?> ShowDialog { get; set; }
 
     public ViewModelActivator Activator { get; }
 }

@@ -11,7 +11,7 @@ public partial class NewItemViewModel : ViewModelBase
 {
     public NewItemViewModel()
     {
-        AcceptNewItemCommand = ReactiveCommand.Create(() => new ToDoItem(Name, "Filler"));
+        AcceptNewItemCommand = ReactiveCommand.Create(() => new ItemViewModel(new ToDoItem(Name, "Filler")));
         CancelCommand = ReactiveCommand.Create(() => new Unit());
     }
 
@@ -21,6 +21,6 @@ public partial class NewItemViewModel : ViewModelBase
         get => _name;
         set => this.RaiseAndSetIfChanged(ref _name, value);
     }
-    public ReactiveCommand<Unit, ToDoItem> AcceptNewItemCommand { get; }
+    public ReactiveCommand<Unit, ItemViewModel> AcceptNewItemCommand { get; }
     public ReactiveCommand<Unit, Unit> CancelCommand { get; }
 }

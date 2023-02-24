@@ -7,9 +7,9 @@ using System.Reactive;
 
 namespace ToDo.ViewModels;
 
-public partial class NewItemViewModel : ReactiveObject
+public partial class EditItemViewModel : ViewModelBase
 {
-    public NewItemViewModel()
+    public EditItemViewModel()
     {
         AcceptNewItemCommand = ReactiveCommand.Create(() => new ItemViewModel(new ToDoItem(Name, "Filler", false, 0)));
         CancelCommand = ReactiveCommand.Create(() => new Unit());
@@ -24,3 +24,4 @@ public partial class NewItemViewModel : ReactiveObject
     public ReactiveCommand<Unit, ItemViewModel> AcceptNewItemCommand { get; }
     public ReactiveCommand<Unit, Unit> CancelCommand { get; }
 }
+

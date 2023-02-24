@@ -1,9 +1,10 @@
 ﻿using System;
-using ReactiveUI;
 using System.Collections.ObjectModel;
-using DynamicData;
 using System.Reactive.Disposables;
 using System.Reactive.Linq;
+using ReactiveUI;
+using DynamicData;
+using DynamicData.Aggregation;
 using ToDo.Models;
 using System.Collections.Generic;
 
@@ -13,7 +14,6 @@ public class MainWindowViewModel : ReactiveObject, IActivatableViewModel
 {
     public MainWindowViewModel()
     {
-        DoneItems = 0;
         DB = Saver.Get();
         _sourceList = new SourceList<ItemViewModel>();
         foreach (ToDoItem item in DB.Items)
@@ -23,16 +23,23 @@ public class MainWindowViewModel : ReactiveObject, IActivatableViewModel
 
         _sourceList
             .Connect()
+            .StartWithEmpty()
             .ObserveOn(RxApp.MainThreadScheduler)
             .Bind(out _colle)
             .DisposeMany()
             .Subscribe();
 
-        _sourceList
+        var shared = _sourceList
             .Connect()
-            .Sum(item => 1)
+            .AutoRefreshOnObservable(item => item.WhenAnyValue(x => x.IsDone))
             .ObserveOn(RxApp.MainThreadScheduler)
-            .Subscribe(result => DoneItems = result);
+            .Publish();
+
+        _cleanUp = new CompositeDisposable(
+            shared.Filter(item => item.IsDone == true).Count().Subscribe(cnt => DoneItemsCnt = cnt),
+            shared.Count().Subscribe(cnt => ItemsCnt = cnt),
+            shared.Connect()
+        );
 
         ShowDialog = new Interaction<NewItemViewModel, ItemViewModel>();
 
@@ -62,12 +69,20 @@ public class MainWindowViewModel : ReactiveObject, IActivatableViewModel
         );
     }
 
-    private int _doneItems;
-    public int DoneItems
+    public string ItemsCntString {get; set;}
+    private int _doneItemsCnt;
+    public int DoneItemsCnt
     {
-        get => _doneItems;
-        set => this.RaiseAndSetIfChanged(ref _doneItems, value);
+        get => _doneItemsCnt;
+        set => this.RaiseAndSetIfChanged(ref _doneItemsCnt, value);
     }
+    private int _itemsCnt;
+    public int ItemsCnt
+    {
+        get => _itemsCnt;
+        set => this.RaiseAndSetIfChanged(ref _itemsCnt, value);
+    }
+
     private int _selectedIndex;
     public int SelectedIndex
     {
@@ -76,6 +91,8 @@ public class MainWindowViewModel : ReactiveObject, IActivatableViewModel
     }
 
     private SourceList<ItemViewModel> _sourceList;
+
+    private readonly IDisposable _cleanUp;
 
     private readonly ReadOnlyObservableCollection<ItemViewModel> _colle;
     public ReadOnlyObservableCollection<ItemViewModel> Colle => _colle;

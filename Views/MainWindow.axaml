@@ -16,7 +16,7 @@
 </Window.Resources>
 
 <Grid ColumnDefinitions="*" RowDefinitions="auto, *, auto">
-    <TextBlock Grid.Row="0" Text="{Binding DoneItems}">
+    <TextBlock Grid.Row="0" Text="{Binding DoneItemsCnt}">
     </TextBlock>
     <ScrollViewer Grid.Row="1">
         <ListBox x:Name="TheListBox" SelectedIndex="{Binding SelectedIndex}" Items="{Binding Colle}">

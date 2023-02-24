@@ -14,6 +14,7 @@ public class MainWindowViewModel : ReactiveObject, IActivatableViewModel
 {
     public MainWindowViewModel()
     {
+        /// Добавить элементы в список из JSON
         DB = Saver.Get();
         _sourceList = new SourceList<ItemViewModel>();
         foreach (ToDoItem item in DB.Items)
@@ -21,6 +22,7 @@ public class MainWindowViewModel : ReactiveObject, IActivatableViewModel
             _sourceList.Add(new ItemViewModel(item));
         }
 
+        /// Забиндить список к ReadOnlyObservableCollection
         _sourceList
             .Connect()
             .StartWithEmpty()
@@ -29,17 +31,21 @@ public class MainWindowViewModel : ReactiveObject, IActivatableViewModel
             .DisposeMany()
             .Subscribe();
 
+        /// СТАТИСТИКА
+
         var shared = _sourceList
             .Connect()
             .AutoRefreshOnObservable(item => item.WhenAnyValue(x => x.IsDone))
             .ObserveOn(RxApp.MainThreadScheduler)
             .Publish();
 
-        _cleanUp = new CompositeDisposable(
+        _cleanStats = new CompositeDisposable(
             shared.Filter(item => item.IsDone == true).Count().Subscribe(cnt => DoneItemsCnt = cnt),
             shared.Count().Subscribe(cnt => ItemsCnt = cnt),
             shared.Connect()
         );
+
+        /// НОВАЯ ЗАДАЧА
 
         ShowDialog = new Interaction<NewItemViewModel, ItemViewModel>();
 
@@ -53,8 +59,10 @@ public class MainWindowViewModel : ReactiveObject, IActivatableViewModel
             }
         });
 
+        /// Удалить задачу
         RemoveItemCommand = ReactiveCommand.Create(() => _sourceList.RemoveAt(SelectedIndex));
 
+        /// Активация VM
         Activator = new ViewModelActivator();
         this.WhenActivated(
             (CompositeDisposable disposables) =>
@@ -69,6 +77,7 @@ public class MainWindowViewModel : ReactiveObject, IActivatableViewModel
         );
     }
 
+    /// Статистика
     public string ItemsCntString {get; set;}
     private int _doneItemsCnt;
     public int DoneItemsCnt
@@ -83,6 +92,8 @@ public class MainWindowViewModel : ReactiveObject, IActivatableViewModel
         set => this.RaiseAndSetIfChanged(ref _itemsCnt, value);
     }
 
+    /// Удаление задач
+    public IReactiveCommand RemoveItemCommand { get; }
     private int _selectedIndex;
     public int SelectedIndex
     {
@@ -90,16 +101,16 @@ public class MainWindowViewModel : ReactiveObject, IActivatableViewModel
         set => this.RaiseAndSetIfChanged(ref _selectedIndex, value);
     }
 
+    /// Коллекции
     private SourceList<ItemViewModel> _sourceList;
-
-    private readonly IDisposable _cleanUp;
-
     private readonly ReadOnlyObservableCollection<ItemViewModel> _colle;
     public ReadOnlyObservableCollection<ItemViewModel> Colle => _colle;
 
+    /// Новая задача
     public IReactiveCommand NewItemCommand { get; }
-    public IReactiveCommand RemoveItemCommand { get; }
+    public Interaction<NewItemViewModel, ItemViewModel?> ShowDialog { get; set; }
 
+    /// Сериализация
     public void SaveData()
     {
         var list = new List<ToDoItem>();
@@ -111,13 +122,14 @@ public class MainWindowViewModel : ReactiveObject, IActivatableViewModel
         Saver.Save(DB);
     }
 
+    /// Модель
     private DataBase _db;
     public DataBase DB
     {
         get => _db;
         set => _db = value;
     }
-    public Interaction<NewItemViewModel, ItemViewModel?> ShowDialog { get; set; }
 
     public ViewModelActivator Activator { get; }
+    private readonly IDisposable _cleanStats;
 }

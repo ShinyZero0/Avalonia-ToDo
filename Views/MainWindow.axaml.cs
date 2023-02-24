@@ -12,10 +12,10 @@ public partial class MainWindow : ReactiveWindow<MainWindowViewModel>
     public MainWindow()
     {
         InitializeComponent();
-        this.WhenActivated(d => d(ViewModel.ShowDialog.RegisterHandler(DoShowDialogAsync)));
+        this.WhenActivated(d => d(ViewModel.ShowNewItemDialog.RegisterHandler(DoShowNewItemDialogAsync)));
     }
 
-    private async Task DoShowDialogAsync(
+    private async Task DoShowNewItemDialogAsync(
         InteractionContext<NewItemViewModel, ItemViewModel?> interaction
     )
     {

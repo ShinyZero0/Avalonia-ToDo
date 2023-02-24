@@ -47,12 +47,12 @@ public class MainWindowViewModel : ReactiveObject, IActivatableViewModel
 
         /// НОВАЯ ЗАДАЧА
 
-        ShowDialog = new Interaction<NewItemViewModel, ItemViewModel>();
+        ShowNewItemDialog = new Interaction<NewItemViewModel, ItemViewModel>();
 
         NewItemCommand = ReactiveCommand.CreateFromTask(async () =>
         {
             var adder = new NewItemViewModel();
-            var result = await ShowDialog.Handle(adder);
+            var result = await ShowNewItemDialog.Handle(adder);
             if (result is not null)
             {
                 _sourceList.Add(result);
@@ -108,7 +108,7 @@ public class MainWindowViewModel : ReactiveObject, IActivatableViewModel
 
     /// Новая задача
     public IReactiveCommand NewItemCommand { get; }
-    public Interaction<NewItemViewModel, ItemViewModel?> ShowDialog { get; set; }
+    public Interaction<NewItemViewModel, ItemViewModel?> ShowNewItemDialog { get; set; }
 
     /// Сериализация
     public void SaveData()

@@ -20,7 +20,10 @@ public class Saver
             using (var jsonSR = new StreamReader(@"data.json"))
             {
                 string jsonstr = jsonSR.ReadToEnd();
-                dataBase = JsonConvert.DeserializeObject<DataBase>(jsonstr);
+                if (!string.IsNullOrWhiteSpace(jsonstr) && jsonstr.StartsWith("{") && jsonstr.EndsWith("}"))
+                { 
+                    dataBase = JsonConvert.DeserializeObject<DataBase>(jsonstr);
+                }
             }
         }
         return dataBase;

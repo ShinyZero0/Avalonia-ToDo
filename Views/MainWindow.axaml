@@ -5,7 +5,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:local="clr-namespace:ToDo.Views"
     mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-    Width="400" Height="600"
+    Width="500" Height="600"
     x:Class="ToDo.Views.MainWindow"
     x:DataType="vm:MainWindowViewModel"
     x:CompileBindings="True"
@@ -16,13 +16,16 @@
 </Window.Resources>
 
 <Grid ColumnDefinitions="*" RowDefinitions="auto, *, auto">
+    <TextBlock Grid.Row="0" Text="{Binding DoneItems}">
+    </TextBlock>
     <ScrollViewer Grid.Row="1">
         <ListBox x:Name="TheListBox" SelectedIndex="{Binding SelectedIndex}" Items="{Binding Colle}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <CheckBox IsChecked="{Binding IsDone}">
-                        <TextBlock TextWrapping="Wrap" Text="{Binding Name}"/>
-                    </CheckBox>
+                    <Grid RowDefinitions="auto" ColumnDefinitions="auto,*">
+                        <CheckBox Grid.Column="0" IsChecked="{Binding IsDone}"/>
+                        <TextBlock Grid.Column="1" TextWrapping="Wrap" VerticalAlignment="Center" Text="{Binding Name}"/>
+                    </Grid>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
@@ -35,9 +38,6 @@
         <Button Command="{Binding RemoveItemCommand}" IsEnabled="{Binding #TheListBox.SelectedItem, Converter={x:Static ObjectConverters.IsNotNull}}">
             Удалить
         </Button>
-        <!-- <Button Command="{Binding SaveDataCommand}"> -->
-        <!--     Сохранить -->
-        <!-- </Button> -->
     </StackPanel>
 </Grid>
 

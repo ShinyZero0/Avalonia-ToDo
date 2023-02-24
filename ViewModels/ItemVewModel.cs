@@ -13,6 +13,11 @@ public class ItemViewModel : ViewModelBase
         Priority = item.Priority;
     }
 
+    public ToDoItem ToToDoItem()
+    {
+        return new ToDoItem(this.Name, this.Content, this.IsDone, this.Priority);
+    }
+
     private string _content;
     public string Content
     {
@@ -31,5 +36,10 @@ public class ItemViewModel : ViewModelBase
         get => _isDone;
         set => this.RaiseAndSetIfChanged(ref _isDone, value);
     }
-    public int Priority { get; set; }
+    private int _priority;
+    public int Priority
+    {
+        get => _priority;
+        set => this.RaiseAndSetIfChanged(ref _priority, value);
+    }
 }

@@ -1,3 +1,5 @@
+using ToDo.ViewModels;
+
 namespace ToDo.Models
 {
     public class ToDoItem
@@ -6,12 +8,12 @@ namespace ToDo.Models
         public string Content {get; set;}
         public bool IsDone {get; set;}
         public int Priority {get; set;}
-        public ToDoItem(string n, string c) 
+        public ToDoItem(string n, string c, bool i, int p)
         {
             Name = n;
             Content = c;
-            IsDone = false;
-            Priority = 0;
+            IsDone = i;
+            Priority = p;
         }
     }
 }

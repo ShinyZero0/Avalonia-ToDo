@@ -5,6 +5,7 @@ using DynamicData;
 using System.Reactive.Disposables;
 using System.Reactive.Linq;
 using ToDo.Models;
+using System.Collections.Generic;
 
 namespace ToDo.ViewModels;
 
@@ -12,6 +13,7 @@ public class MainWindowViewModel : ReactiveObject, IActivatableViewModel
 {
     public MainWindowViewModel()
     {
+        DoneItems = 0;
         DB = Saver.Get();
         _sourceList = new SourceList<ItemViewModel>();
         foreach (ToDoItem item in DB.Items)
@@ -22,10 +24,15 @@ public class MainWindowViewModel : ReactiveObject, IActivatableViewModel
         _sourceList
             .Connect()
             .ObserveOn(RxApp.MainThreadScheduler)
-            /* .AutoRefreshOnObservable(item => item.WhenAnyValue(x => x.IsDone)) */
             .Bind(out _colle)
             .DisposeMany()
             .Subscribe();
+
+        _sourceList
+            .Connect()
+            .Sum(item => 1)
+            .ObserveOn(RxApp.MainThreadScheduler)
+            .Subscribe(result => DoneItems = result);
 
         ShowDialog = new Interaction<NewItemViewModel, ItemViewModel>();
 
@@ -55,6 +62,12 @@ public class MainWindowViewModel : ReactiveObject, IActivatableViewModel
         );
     }
 
+    private int _doneItems;
+    public int DoneItems
+    {
+        get => _doneItems;
+        set => this.RaiseAndSetIfChanged(ref _doneItems, value);
+    }
     private int _selectedIndex;
     public int SelectedIndex
     {
@@ -72,7 +85,12 @@ public class MainWindowViewModel : ReactiveObject, IActivatableViewModel
 
     public void SaveData()
     {
-        /* this.DB.Items = this._sourceList.Items; */
+        var list = new List<ToDoItem>();
+        foreach (ItemViewModel item in this._sourceList.Items)
+        {
+            list.Add(item.ToToDoItem());
+        }
+        DB.Items = list;
         Saver.Save(DB);
     }
 

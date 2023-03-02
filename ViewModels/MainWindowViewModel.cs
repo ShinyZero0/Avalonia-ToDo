@@ -77,8 +77,30 @@ public class MainWindowViewModel : ReactiveObject, IActivatableViewModel
         );
     }
 
+    /// Коллекции
+    private SourceList<ItemViewModel> _sourceList;
+    private readonly ReadOnlyObservableCollection<ItemViewModel> _colle;
+    public ReadOnlyObservableCollection<ItemViewModel> Colle => _colle;
+
+    /// Новая задача
+    public IReactiveCommand NewItemCommand { get; }
+    public Interaction<NewItemViewModel, ItemViewModel?> ShowNewItemDialog { get; set; }
+
+    /// Редактирования задач
+    public IReactiveCommand EditItemCommand { get; }
+    public Interaction<ItemViewModel, ItemViewModel?> ShowEditItemDIalog { get; set; }
+
+    /// Удаление задач
+    public IReactiveCommand RemoveItemCommand { get; }
+    private int _selectedIndex;
+    public int SelectedIndex
+    {
+        get => _selectedIndex;
+        set => this.RaiseAndSetIfChanged(ref _selectedIndex, value);
+    }
+
     /// Статистика
-    public string ItemsCntString {get; set;}
+    public string ItemsCntString { get; set; }
     private int _doneItemsCnt;
     public int DoneItemsCnt
     {
@@ -91,24 +113,6 @@ public class MainWindowViewModel : ReactiveObject, IActivatableViewModel
         get => _itemsCnt;
         set => this.RaiseAndSetIfChanged(ref _itemsCnt, value);
     }
-
-    /// Удаление задач
-    public IReactiveCommand RemoveItemCommand { get; }
-    private int _selectedIndex;
-    public int SelectedIndex
-    {
-        get => _selectedIndex;
-        set => this.RaiseAndSetIfChanged(ref _selectedIndex, value);
-    }
-
-    /// Коллекции
-    private SourceList<ItemViewModel> _sourceList;
-    private readonly ReadOnlyObservableCollection<ItemViewModel> _colle;
-    public ReadOnlyObservableCollection<ItemViewModel> Colle => _colle;
-
-    /// Новая задача
-    public IReactiveCommand NewItemCommand { get; }
-    public Interaction<NewItemViewModel, ItemViewModel?> ShowNewItemDialog { get; set; }
 
     /// Сериализация
     public void SaveData()

@@ -9,7 +9,7 @@ namespace ToDo.ViewModels;
 
 public partial class EditItemViewModel : ReactiveObject
 {
-    public EditItemViewModel()
+    public EditItemViewModel(ItemViewModel EditedItem)
     {
         AcceptEditedItemCommand = ReactiveCommand.Create(() => new ItemViewModel(new ToDoItem(Name, "Filler", false, 0)));
         CancelCommand = ReactiveCommand.Create(() => new Unit());

@@ -5,8 +5,12 @@ using System.Reactive.Linq;
 using ReactiveUI;
 using DynamicData;
 using DynamicData.Aggregation;
+using DynamicData.PLinq;
+using DynamicData.Binding;
 using ToDo.Models;
 using System.Collections.Generic;
+using System.Linq;
+using Lucene.Net;
 
 namespace ToDo.ViewModels;
 
@@ -22,10 +26,17 @@ public class MainWindowViewModel : ReactiveObject, IActivatableViewModel
             _sourceList.Add(new ItemViewModel(item));
         }
 
+        // Поиск
+
+        var filter = this.WhenAnyValue(vm => vm.SearchText)
+            .Throttle(TimeSpan.FromMilliseconds(50))
+            .Select(MakeFilter);
+
         /// Забиндить список к ReadOnlyObservableCollection
         _sourceList
             .Connect()
             .StartWithEmpty()
+            .Filter(filter)
             .ObserveOn(RxApp.MainThreadScheduler)
             .Bind(out _colle)
             .DisposeMany()
@@ -97,6 +108,19 @@ public class MainWindowViewModel : ReactiveObject, IActivatableViewModel
     {
         get => _selectedIndex;
         set => this.RaiseAndSetIfChanged(ref _selectedIndex, value);
+    }
+
+    private string _searchText;
+    public string SearchText
+    {
+        get => _searchText;
+        set => this.RaiseAndSetIfChanged(ref _searchText, value);
+    }
+
+    private static Func<ItemViewModel, bool> MakeFilter(string searchText)
+    {
+        if (string.IsNullOrWhiteSpace(searchText)) return i => true;
+        return i => i.Name.Contains(searchText);
     }
 
     /// Статистика

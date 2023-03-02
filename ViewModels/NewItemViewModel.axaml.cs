@@ -11,7 +11,9 @@ public partial class NewItemViewModel : ReactiveObject
 {
     public NewItemViewModel()
     {
-        AcceptNewItemCommand = ReactiveCommand.Create(() => new ItemViewModel(new ToDoItem(Name, "Filler", false, 0)));
+        AcceptNewItemCommand = ReactiveCommand.Create(
+            () => new ItemViewModel(new ToDoItem(Name, "Filler", false, 0))
+        );
         CancelCommand = ReactiveCommand.Create(() => new Unit());
     }
 

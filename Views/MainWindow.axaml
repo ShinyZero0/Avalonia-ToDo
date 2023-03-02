@@ -1,44 +1,47 @@
 <Window xmlns="https://github.com/avaloniaui"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:vm="using:ToDo.ViewModels"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:local="clr-namespace:ToDo.Views"
-    mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-    Width="500" Height="600"
-    x:Class="ToDo.Views.MainWindow"
-    x:DataType="vm:MainWindowViewModel"
-    x:CompileBindings="True"
-    Icon="/Assets/avalonia-logo.ico"
-    Title="Список задач">
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:ToDo.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ToDo.Views"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        Width="500" Height="600"
+        x:Class="ToDo.Views.MainWindow"
+        x:DataType="vm:MainWindowViewModel"
+        x:CompileBindings="True"
+        Icon="/Assets/avalonia-logo.ico"
+        Title="Список задач">
 
 <Window.Resources>
 </Window.Resources>
 
 <Grid ColumnDefinitions="*" RowDefinitions="auto, *, auto">
-    <TextBlock Grid.Row="0" Text="{Binding DoneItemsCnt}">
-    </TextBlock>
-    <ScrollViewer Grid.Row="1">
-        <ListBox x:Name="TheListBox" SelectedIndex="{Binding SelectedIndex}" Items="{Binding Colle}">
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <Grid RowDefinitions="auto" ColumnDefinitions="auto,*">
-                        <CheckBox Grid.Column="0" IsChecked="{Binding IsDone}"/>
-                        <TextBlock Grid.Column="1" TextWrapping="Wrap" VerticalAlignment="Center" Text="{Binding Name}"/>
-                    </Grid>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
-    </ScrollViewer>
+  <TextBlock Grid.Row="0" Text="{Binding DoneItemsCnt}">
+  </TextBlock>
+  <ScrollViewer Grid.Row="1">
+    <ListBox x:Name="TheListBox" SelectedIndex="{Binding SelectedIndex}" Items="{Binding Colle}">
+      <ListBox.ItemTemplate>
+        <DataTemplate>
+          <Grid RowDefinitions="auto" ColumnDefinitions="auto,*">
+            <CheckBox Grid.Column="0" IsChecked="{Binding IsDone}"/>
+            <TextBlock Grid.Column="1" TextWrapping="Wrap" VerticalAlignment="Center" Text="{Binding Name}"/>
+          </Grid>
+        </DataTemplate>
+      </ListBox.ItemTemplate>
+    </ListBox>
+  </ScrollViewer>
 
-    <StackPanel Grid.Row="2" Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Center">
-        <Button Command="{Binding NewItemCommand}">
-            Добавить
-        </Button>
-        <Button Command="{Binding RemoveItemCommand}" IsEnabled="{Binding #TheListBox.SelectedItem, Converter={x:Static ObjectConverters.IsNotNull}}">
-            Удалить
-        </Button>
-    </StackPanel>
+  <StackPanel Grid.Row="2" Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Center">
+    <Button Command="{Binding NewItemCommand}">
+      Добавить
+    </Button>
+    <Button Command="{Binding EditItemCommand}">
+      Изменить
+    </Button>
+    <Button Command="{Binding RemoveItemCommand}" IsEnabled="{Binding #TheListBox.SelectedItem, Converter={x:Static ObjectConverters.IsNotNull}}">
+      Удалить
+    </Button>
+  </StackPanel>
 </Grid>
 
 </Window>

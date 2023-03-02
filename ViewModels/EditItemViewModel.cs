@@ -11,7 +11,12 @@ public partial class EditItemViewModel : ReactiveObject
 {
     public EditItemViewModel(ItemViewModel EditedItem)
     {
-        AcceptEditedItemCommand = ReactiveCommand.Create(() => new ItemViewModel(new ToDoItem(Name, "Filler", false, 0)));
+        Name = EditedItem.Name;
+        AcceptEditedItemCommand = ReactiveCommand.Create(() =>
+        {
+            EditedItem.Name = Name;
+            return EditedItem;
+        });
         CancelCommand = ReactiveCommand.Create(() => new Unit());
     }
 
@@ -24,4 +29,3 @@ public partial class EditItemViewModel : ReactiveObject
     public ReactiveCommand<Unit, ItemViewModel> AcceptEditedItemCommand { get; }
     public ReactiveCommand<Unit, Unit> CancelCommand { get; }
 }
-

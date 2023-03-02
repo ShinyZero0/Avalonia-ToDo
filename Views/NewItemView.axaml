@@ -1,21 +1,21 @@
 <Window xmlns="https://github.com/avaloniaui"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:vm="using:ToDo.ViewModels"
-    x:DataType="vm:NewItemViewModel"
-    x:CompileBindings="True"
-    Width="400" Height="300"
-    mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-    x:Class="ToDo.Views.NewItemView"
-    Title="Добавить задачу">
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="using:ToDo.ViewModels"
+        x:DataType="vm:NewItemViewModel"
+        x:CompileBindings="True"
+        Width="400" Height="300"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="ToDo.Views.NewItemView"
+        Title="Добавить задачу">
 
 <Grid ColumnDefinitions="*" RowDefinitions="*, auto">
-    <TextBox x:Name="InputBox" Grid.Row="0" AcceptsReturn="True" TextWrapping="Wrap" Text="{Binding Name}"/>
-    <StackPanel Grid.Row="1" Orientation="Horizontal">
-        <Button IsEnabled="{Binding #InputBox.Text, Converter={x:Static StringConverters.IsNotNullOrEmpty}}" Content="Добавить" Command="{Binding AcceptNewItemCommand}"/>
-        <Button Content="Отмена" Command="{Binding CancelCommand}"/>
-    </StackPanel>
+  <TextBox x:Name="InputBox" Grid.Row="0" AcceptsReturn="True" TextWrapping="Wrap" Text="{Binding Name}"/>
+  <StackPanel Grid.Row="1" Orientation="Horizontal">
+    <Button IsEnabled="{Binding #InputBox.Text, Converter={x:Static StringConverters.IsNotNullOrEmpty}}" Content="Добавить" Command="{Binding AcceptNewItemCommand}"/>
+    <Button Content="Отмена" Command="{Binding CancelCommand}"/>
+  </StackPanel>
 </Grid>
 
 </Window>

@@ -47,7 +47,7 @@ public class MainWindowViewModel : ReactiveObject, IActivatableViewModel
 
         /// НОВАЯ ЗАДАЧА
 
-        ShowNewItemDialog = new Interaction<NewItemViewModel, ItemViewModel>();
+        ShowNewItemDialog = new Interaction<NewItemViewModel, ItemViewModel?>();
 
         NewItemCommand = ReactiveCommand.CreateFromTask(async () =>
         {
@@ -56,6 +56,19 @@ public class MainWindowViewModel : ReactiveObject, IActivatableViewModel
             if (result is not null)
             {
                 _sourceList.Add(result);
+            }
+        });
+
+        // Редактировать задачу
+
+        ShowEditItemDialog = new Interaction<ItemViewModel, ItemViewModel?>();
+
+        EditItemCommand = ReactiveCommand.CreateFromTask(async () =>
+        {
+            var result = await ShowEditItemDialog.Handle(Colle[SelectedIndex]);
+            if (result is not null)
+            {
+                _sourceList.ReplaceAt(SelectedIndex, result);
             }
         });
 
@@ -88,7 +101,7 @@ public class MainWindowViewModel : ReactiveObject, IActivatableViewModel
 
     /// Редактирования задач
     public IReactiveCommand EditItemCommand { get; }
-    public Interaction<ItemViewModel, ItemViewModel?> ShowEditItemDIalog { get; set; }
+    public Interaction<ItemViewModel, ItemViewModel?> ShowEditItemDialog { get; set; }
 
     /// Удаление задач
     public IReactiveCommand RemoveItemCommand { get; }
@@ -135,5 +148,6 @@ public class MainWindowViewModel : ReactiveObject, IActivatableViewModel
     }
 
     public ViewModelActivator Activator { get; }
+
     private readonly IDisposable _cleanStats;
 }

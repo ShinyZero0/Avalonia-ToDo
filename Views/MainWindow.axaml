@@ -34,7 +34,7 @@
       <Button Command="{Binding NewItemCommand}">
         Добавить
       </Button>
-      <Button Command="{Binding EditItemCommand}">
+      <Button Command="{Binding EditItemCommand}" IsEnabled="{Binding #TheListBox.SelectedItem, Converter={x:Static ObjectConverters.IsNotNull}}">
         Изменить
       </Button>
       <Button Command="{Binding RemoveItemCommand}" IsEnabled="{Binding #TheListBox.SelectedItem, Converter={x:Static ObjectConverters.IsNotNull}}">

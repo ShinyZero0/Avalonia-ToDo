@@ -16,8 +16,7 @@
 </Window.Resources>
 
 <Grid ColumnDefinitions="*" RowDefinitions="auto, *, auto">
-  <TextBlock Grid.Row="0" Text="{Binding DoneItemsCnt}">
-  </TextBlock>
+  <TextBox Grid.Row="0" Text="{Binding SearchText}"/>
   <ScrollViewer Grid.Row="1">
     <ListBox x:Name="TheListBox" SelectedIndex="{Binding SelectedIndex}" Items="{Binding Colle}">
       <ListBox.ItemTemplate>
@@ -30,17 +29,19 @@
       </ListBox.ItemTemplate>
     </ListBox>
   </ScrollViewer>
-
-  <StackPanel Grid.Row="2" Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Center">
-    <Button Command="{Binding NewItemCommand}">
-      Добавить
-    </Button>
-    <Button Command="{Binding EditItemCommand}">
-      Изменить
-    </Button>
-    <Button Command="{Binding RemoveItemCommand}" IsEnabled="{Binding #TheListBox.SelectedItem, Converter={x:Static ObjectConverters.IsNotNull}}">
-      Удалить
-    </Button>
+  <StackPanel Grid.Row="2" Orientation="Vertical">
+    <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Center">
+      <Button Command="{Binding NewItemCommand}">
+        Добавить
+      </Button>
+      <Button Command="{Binding EditItemCommand}">
+        Изменить
+      </Button>
+      <Button Command="{Binding RemoveItemCommand}" IsEnabled="{Binding #TheListBox.SelectedItem, Converter={x:Static ObjectConverters.IsNotNull}}">
+        Удалить
+      </Button>
+    </StackPanel>
+    <TextBlock Text="{Binding DoneItemsCnt}"/>
   </StackPanel>
 </Grid>
 

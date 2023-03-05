@@ -11,10 +11,10 @@ public partial class NewItemView : ReactiveWindow<NewItemViewModel>
     public NewItemView()
     {
         InitializeComponent();
-        var InputBox = this.FindControl<TextBox>("InputBox");
-        if (InputBox is not null)
+        var NameBox = this.FindControl<TextBox>("NameBox");
+        if (NameBox is not null)
         {
-            InputBox.AttachedToVisualTree += (s, e) => InputBox.Focus();
+            NameBox.AttachedToVisualTree += (s, e) => NameBox.Focus();
         }
         this.WhenActivated(
             d => d(ViewModel.AcceptNewItemCommand.Subscribe(result => Close(result)))

@@ -13,7 +13,14 @@
         Title="Список задач">
 
 <Window.Resources>
+  <local:GetCheckBoxIcon x:Key="GetCheckBoxIcon"/>
 </Window.Resources>
+
+<Window.Styles>
+  <!-- <Style Selector="CheckBox.Fold:unchecked"> -->
+  <!--   <Setter Property="Glyph" Value="G" /> -->
+  <!-- </Style> -->
+</Window.Styles>
 
 <Grid ColumnDefinitions="*" RowDefinitions="auto, *, auto">
   <TextBox Grid.Row="0" Text="{Binding SearchText}"/>
@@ -24,7 +31,14 @@
           <Grid RowDefinitions="auto, auto" ColumnDefinitions="auto, *, auto">
             <CheckBox Grid.Column="0" IsChecked="{Binding IsDone}"/>
             <TextBlock Grid.Column="1" TextWrapping="Wrap" VerticalAlignment="Center" Text="{Binding Name}"/>
-            <CheckBox x:Name="VisibilityToggle" Grid.Column="3"/>
+            <CheckBox  x:Name="VisibilityToggle" IsChecked="False" Grid.Column="3">
+              <CheckBox.Template>
+                <ControlTemplate>
+                  <Image Source="{TemplateBinding IsChecked, Converter={StaticResource GetCheckBoxIcon}}" Width="20" Height="20" />
+                  <!-- VisualRoot -->
+                </ControlTemplate>
+              </CheckBox.Template>
+            </CheckBox>
             <TextBlock IsVisible="{Binding #VisibilityToggle.IsChecked}" Grid.Row="1" TextWrapping="Wrap" Text="{Binding Content}" />
           </Grid>
         </DataTemplate>

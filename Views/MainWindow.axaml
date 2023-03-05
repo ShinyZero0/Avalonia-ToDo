@@ -21,14 +21,17 @@
     <ListBox x:Name="TheListBox" SelectedIndex="{Binding SelectedIndex}" Items="{Binding Colle}">
       <ListBox.ItemTemplate>
         <DataTemplate>
-          <Grid RowDefinitions="auto" ColumnDefinitions="auto,*">
+          <Grid RowDefinitions="auto, auto" ColumnDefinitions="auto, *, auto">
             <CheckBox Grid.Column="0" IsChecked="{Binding IsDone}"/>
             <TextBlock Grid.Column="1" TextWrapping="Wrap" VerticalAlignment="Center" Text="{Binding Name}"/>
+            <CheckBox x:Name="VisibilityToggle" Grid.Column="3"/>
+            <TextBlock IsVisible="{Binding #VisibilityToggle.IsChecked}" Grid.Row="1" TextWrapping="Wrap" Text="{Binding Content}" />
           </Grid>
         </DataTemplate>
       </ListBox.ItemTemplate>
     </ListBox>
   </ScrollViewer>
+
   <StackPanel Grid.Row="2" Orientation="Vertical">
     <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Center">
       <Button Command="{Binding NewItemCommand}">

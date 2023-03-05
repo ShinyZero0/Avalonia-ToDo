@@ -10,7 +10,7 @@ using DynamicData.Binding;
 using ToDo.Models;
 using System.Collections.Generic;
 using System.Linq;
-using Lucene.Net;
+// using Lucene.Net;
 
 namespace ToDo.ViewModels;
 
@@ -18,7 +18,7 @@ public class MainWindowViewModel : ReactiveObject, IActivatableViewModel
 {
     public MainWindowViewModel()
     {
-        /// Добавить элементы в список из JSON
+        // Добавить элементы в список из JSON
         DB = Saver.Get();
         _sourceList = new SourceList<ItemViewModel>();
         foreach (ToDoItem item in DB.Items)
@@ -27,12 +27,11 @@ public class MainWindowViewModel : ReactiveObject, IActivatableViewModel
         }
 
         // Поиск
-
         var filter = this.WhenAnyValue(vm => vm.SearchText)
             .Throttle(TimeSpan.FromMilliseconds(50))
             .Select(MakeFilter);
 
-        /// Забиндить список к ReadOnlyObservableCollection
+        // Забиндить список к ReadOnlyObservableCollection
         _sourceList
             .Connect()
             .StartWithEmpty()
@@ -42,7 +41,7 @@ public class MainWindowViewModel : ReactiveObject, IActivatableViewModel
             .DisposeMany()
             .Subscribe();
 
-        /// СТАТИСТИКА
+        // СТАТИСТИКА
 
         var shared = _sourceList
             .Connect()
@@ -56,7 +55,7 @@ public class MainWindowViewModel : ReactiveObject, IActivatableViewModel
             shared.Connect()
         );
 
-        /// НОВАЯ ЗАДАЧА
+        // НОВАЯ ЗАДАЧА
 
         ShowNewItemDialog = new Interaction<NewItemViewModel, ItemViewModel?>();
 
@@ -70,7 +69,7 @@ public class MainWindowViewModel : ReactiveObject, IActivatableViewModel
             }
         });
 
-        // Редактировать задачу
+        // РЕДАКТИРОВАТЬ ЗАДАЧУ
 
         ShowEditItemDialog = new Interaction<ItemViewModel, ItemViewModel?>();
 
@@ -83,10 +82,10 @@ public class MainWindowViewModel : ReactiveObject, IActivatableViewModel
             }
         });
 
-        /// Удалить задачу
+        // Удалить задачу
         RemoveItemCommand = ReactiveCommand.Create(() => _sourceList.RemoveAt(SelectedIndex));
 
-        /// Активация VM
+        // Активация VM
         Activator = new ViewModelActivator();
         this.WhenActivated(
             (CompositeDisposable disposables) =>
@@ -101,20 +100,20 @@ public class MainWindowViewModel : ReactiveObject, IActivatableViewModel
         );
     }
 
-    /// Коллекции
+    // Коллекции
     private SourceList<ItemViewModel> _sourceList;
     private readonly ReadOnlyObservableCollection<ItemViewModel> _colle;
     public ReadOnlyObservableCollection<ItemViewModel> Colle => _colle;
 
-    /// Новая задача
+    // Новая задача
     public IReactiveCommand NewItemCommand { get; }
     public Interaction<NewItemViewModel, ItemViewModel?> ShowNewItemDialog { get; set; }
 
-    /// Редактирования задач
+    // Редактирование задач
     public IReactiveCommand EditItemCommand { get; }
     public Interaction<ItemViewModel, ItemViewModel?> ShowEditItemDialog { get; set; }
 
-    /// Удаление задач
+    // Удаление задач
     public IReactiveCommand RemoveItemCommand { get; }
     private int _selectedIndex;
     public int SelectedIndex
@@ -136,7 +135,7 @@ public class MainWindowViewModel : ReactiveObject, IActivatableViewModel
         return i => i.Name.Contains(searchText);
     }
 
-    /// Статистика
+    // Статистика
     public string ItemsCntString { get; set; }
     private int _doneItemsCnt;
     public int DoneItemsCnt
@@ -151,7 +150,7 @@ public class MainWindowViewModel : ReactiveObject, IActivatableViewModel
         set => this.RaiseAndSetIfChanged(ref _itemsCnt, value);
     }
 
-    /// Сериализация
+    // Сериализация
     public void SaveData()
     {
         var list = new List<ToDoItem>();
@@ -163,7 +162,7 @@ public class MainWindowViewModel : ReactiveObject, IActivatableViewModel
         Saver.Save(DB);
     }
 
-    /// Модель
+    // Модель
     private DataBase _db;
     public DataBase DB
     {

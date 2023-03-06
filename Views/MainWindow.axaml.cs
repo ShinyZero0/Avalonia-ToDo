@@ -34,13 +34,13 @@ public partial class MainWindow : ReactiveWindow<MainWindowViewModel>
     }
 
     private async Task DoShowNewItemDialogAsync(
-        InteractionContext<NewItemViewModel, ItemViewModel?> interaction
+        InteractionContext<NewItemViewModel, ToDoItem?> interaction
     )
     {
         var dialog = new NewItemView();
         dialog.DataContext = interaction.Input;
 
-        var result = await dialog.ShowDialog<ItemViewModel?>(this);
+        var result = await dialog.ShowDialog<ToDoItem?>(this);
         interaction.SetOutput(result);
     }
 }

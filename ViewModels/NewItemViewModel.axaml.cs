@@ -12,7 +12,7 @@ public partial class NewItemViewModel : ReactiveObject
     public NewItemViewModel()
     {
         AcceptNewItemCommand = ReactiveCommand.Create(
-            () => new ItemViewModel(new ToDoItem(Name, "Filler", false, 0))
+            () => new ToDoItem(Name, Content, false, 0)
         );
         CancelCommand = ReactiveCommand.Create(() => new Unit());
     }
@@ -23,6 +23,12 @@ public partial class NewItemViewModel : ReactiveObject
         get => _name;
         set => this.RaiseAndSetIfChanged(ref _name, value);
     }
-    public ReactiveCommand<Unit, ItemViewModel> AcceptNewItemCommand { get; }
+    private string? _content;
+    public string? Content
+    {
+        get => _content;
+        set => this.RaiseAndSetIfChanged(ref _content, value);
+    }
+    public ReactiveCommand<Unit, ToDoItem> AcceptNewItemCommand { get; }
     public ReactiveCommand<Unit, Unit> CancelCommand { get; }
 }

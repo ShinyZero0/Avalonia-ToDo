@@ -28,11 +28,9 @@ public class Saver
             using (var jsonSR = new StreamReader(_data))
             {
                 string jsonstr = jsonSR.ReadToEnd();
-                if (
-                    !string.IsNullOrWhiteSpace(jsonstr)
-                    && jsonstr.StartsWith("{")
-                    && jsonstr.EndsWith("}")
-                )
+                if (!string.IsNullOrWhiteSpace(jsonstr))
+                // && jsonstr.StartsWith("{")
+                // && jsonstr.EndsWith("}")
                 {
                     dataBase = JsonConvert.DeserializeObject<DataBase>(jsonstr);
                 }

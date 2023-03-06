@@ -5,12 +5,13 @@ namespace ToDo.ViewModels;
 
 public class ItemViewModel : ViewModelBase
 {
-    public ItemViewModel(ToDoItem item)
+    public ItemViewModel(ToDoItem item, uint key)
     {
         Name = item.Name;
         Content = item.Content;
         IsDone = item.IsDone;
         Priority = item.Priority;
+        Key = key;
     }
 
     public ToDoItem ToToDoItem()
@@ -18,8 +19,8 @@ public class ItemViewModel : ViewModelBase
         return new ToDoItem(this.Name, this.Content, this.IsDone, this.Priority);
     }
 
-    private string _content;
-    public string Content
+    private string? _content;
+    public string? Content
     {
         get => _content;
         set => this.RaiseAndSetIfChanged(ref _content, value);
@@ -42,4 +43,5 @@ public class ItemViewModel : ViewModelBase
         get => _priority;
         set => this.RaiseAndSetIfChanged(ref _priority, value);
     }
+    public uint Key;
 }

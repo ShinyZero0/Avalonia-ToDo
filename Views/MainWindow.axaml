@@ -3,6 +3,7 @@
         xmlns:vm="using:ToDo.ViewModels"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:md="clr-namespace:Markdown.Avalonia;assembly=Markdown.Avalonia"
         xmlns:local="clr-namespace:ToDo.Views"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         Width="500" Height="600"
@@ -31,14 +32,15 @@
           <Grid RowDefinitions="auto, auto" ColumnDefinitions="auto, *, auto">
             <CheckBox Grid.Column="0" IsChecked="{Binding IsDone}"/>
             <TextBlock Grid.Column="1" TextWrapping="Wrap" VerticalAlignment="Center" Text="{Binding Name}"/>
-            <CheckBox IsVisible="{Binding #ContentBlock.Text, Converter={x:Static ObjectConverters.IsNotNull}}" x:Name="VisibilityToggle" IsChecked="False" Grid.Column="2">
+            <CheckBox IsVisible="{Binding Content, Converter={x:Static ObjectConverters.IsNotNull}}" x:Name="VisibilityToggle" IsChecked="False" Grid.Column="2">
               <CheckBox.Template>
                 <ControlTemplate>
                   <Image Source="{TemplateBinding IsChecked, Converter={StaticResource GetCheckBoxIcon}}" Margin="0,0,10,0" Width="24" Height="24" />
                 </ControlTemplate>
               </CheckBox.Template>
             </CheckBox>
-            <TextBlock x:Name="ContentBlock" Grid.Row="1" Grid.Column="1" IsVisible="{Binding #VisibilityToggle.IsChecked}" TextWrapping="Wrap" Text="{Binding Content}" />
+            <md:MarkdownScrollViewer Grid.Row="1" Grid.Column="1" IsVisible="{Binding #VisibilityToggle.IsChecked}" Markdown="{Binding Content}" />
+            <!-- <TextBlock x:Name="ContentBlock" Grid.Row="1" Grid.Column="1" IsVisible="{Binding #VisibilityToggle.IsChecked}" TextWrapping="Wrap" Text="{Binding Content}" /> -->
           </Grid>
         </DataTemplate>
       </ListBox.ItemTemplate>

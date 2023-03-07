@@ -4,9 +4,7 @@ using System.Reactive.Disposables;
 using System.Reactive.Linq;
 using ReactiveUI;
 using DynamicData;
-using DynamicData.Aggregation;
 using DynamicData.PLinq;
-using DynamicData.Binding;
 using ToDo.Models;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,10 +34,10 @@ public class MainWindowViewModel : ReactiveObject, IActivatableViewModel
 
         _sourceCache
             .Connect()
-            // .AutoRefreshOnObservable(item => item.WhenAnyValue(i => i.IsDone, i => i.Name))
+            .StartWithEmpty()
+            .AutoRefreshOnObservable(item => item.WhenAnyValue(i => i.IsDone, i => i.Name))
             .Filter(filter)
             // .Sort(SortExpressionComparer<ItemViewModel>.Ascending(i => Convert.ToByte(i.IsDone)))
-            // .AutoRefreshOnObservable(item => item.WhenAnyValue(i => i.IsDone, i => i.Name))
             .ObserveOn(RxApp.MainThreadScheduler)
             .Bind(out _colle)
             .DisposeMany()
@@ -52,7 +50,7 @@ public class MainWindowViewModel : ReactiveObject, IActivatableViewModel
 
         // var shared = _sourceCache
         //     .Connect()
-        //     .AutoRefreshOnObservable(item => item.WhenAnyValue(x => x.IsDone))
+        //     .AutoRefreshOnObservable(item => item.WhenAnyValue(i => i.IsDone))
         //     .ObserveOn(RxApp.MainThreadScheduler)
         //     .Publish();
         //
@@ -61,6 +59,8 @@ public class MainWindowViewModel : ReactiveObject, IActivatableViewModel
         //     shared.Count().Subscribe(cnt => ItemsCnt = cnt),
         //     shared.Connect()
         // );
+        // this.WhenAnyValue(vm => vm.DoneItemsCnt, vm => vm.ItemsCnt)
+        //     .Subscribe(cnt => StatsString = $"Выполнено задач: {cnt.Item1.ToString()} из {cnt.Item2.ToString()}");
 
         // НОВАЯ ЗАДАЧА
 
@@ -72,7 +72,7 @@ public class MainWindowViewModel : ReactiveObject, IActivatableViewModel
             var result = await ShowNewItemDialog.Handle(adder);
             if (result is not null)
             {
-                _sourceCache.AddOrUpdate(new ItemViewModel (result, KeyGen()));
+                _sourceCache.AddOrUpdate(new ItemViewModel(result, KeyGen()));
             }
         });
 
@@ -108,6 +108,8 @@ public class MainWindowViewModel : ReactiveObject, IActivatableViewModel
         );
     }
 
+    /// КОНЕЦ КОНСТРУКТОРА
+
     // Коллекции
     private SourceCache<ItemViewModel, uint> _sourceCache;
     private readonly ReadOnlyObservableCollection<ItemViewModel> _colle;
@@ -123,8 +125,8 @@ public class MainWindowViewModel : ReactiveObject, IActivatableViewModel
 
     // Удаление задач
     public IReactiveCommand RemoveItemCommand { get; }
-    private ItemViewModel _selectedItem;
-    public ItemViewModel SelectedItem
+    private ItemViewModel? _selectedItem;
+    public ItemViewModel? SelectedItem
     {
         get => _selectedItem;
         set => this.RaiseAndSetIfChanged(ref _selectedItem, value);
@@ -146,6 +148,12 @@ public class MainWindowViewModel : ReactiveObject, IActivatableViewModel
 
     // Статистика
     public string ItemsCntString { get; set; }
+    private string _statsString;
+    public string StatsString
+    {
+        get => _statsString;
+        set => this.RaiseAndSetIfChanged(ref _statsString, value);
+    }
     private int _doneItemsCnt;
     public int DoneItemsCnt
     {
@@ -188,6 +196,7 @@ public class MainWindowViewModel : ReactiveObject, IActivatableViewModel
         }
         return i;
     }
+
     public ViewModelActivator Activator { get; }
 
     private readonly IDisposable _cleanStats;

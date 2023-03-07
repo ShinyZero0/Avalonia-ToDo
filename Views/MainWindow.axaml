@@ -9,7 +9,7 @@
         x:Class="ToDo.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
         x:CompileBindings="True"
-        Icon="/Assets/avalonia-logo.ico"
+        Icon="/Assets/icon-note.png"
         Title="Список задач">
 
 <Window.Resources>
@@ -57,7 +57,7 @@
         Удалить
       </Button>
     </StackPanel>
-    <TextBlock Text="{Binding DoneItemsCnt}"/>
+    <!-- <TextBlock Text="{Binding DoneItemsCnt}"/> -->
   </StackPanel>
 </Grid>
 

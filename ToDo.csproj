@@ -28,6 +28,8 @@
     <PackageReference Include="Avalonia.ReactiveUI" Version="11.0.0-preview5" />
     <PackageReference Include="Avalonia.Themes.Fluent" Version="11.0.0-preview5" />
     <PackageReference Include="Avalonia.Themes.Simple" Version="11.0.0-preview5" />
+    <PackageReference Include="Markdown.Avalonia" Version="11.0.0-a9" />
+
     <!-- <PackageReference Include="Lucene.Net" Version="4.8.0-beta00016" /> -->
     <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
     <PackageReference Include="XamlNameReferenceGenerator" Version="1.5.1" />

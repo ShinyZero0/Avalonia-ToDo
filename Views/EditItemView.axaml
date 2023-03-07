@@ -12,7 +12,7 @@
 
 <Grid ColumnDefinitions="*" RowDefinitions="auto, *, auto">
   <TextBox x:Name="NameBox" Grid.Row="0" AcceptsReturn="True" TextWrapping="Wrap" Text="{Binding Name}"/>
-  <TextBox x:Name="ContentBox" Grid.Row="1" AcceptsReturn="True" TextWrapping="Wrap" Text="{Binding Content}"/>
+  <TextBox x:Name="ContentBox" FontFamily="/Assets/Fonts/FiraMono-Regular.ttf#Fira Mono" Grid.Row="1" AcceptsReturn="True" TextWrapping="Wrap" Text="{Binding Content}"/>
   <StackPanel Grid.Row="2" Orientation="Horizontal">
     <Button IsEnabled="{Binding #NameBox.Text, Converter={StaticResource IsNotNullOrWhiteSpace}}" Content="Принять" Command="{Binding AcceptEditedItemCommand}"/>
     <Button Content="Отмена" Command="{Binding CancelCommand}"/>

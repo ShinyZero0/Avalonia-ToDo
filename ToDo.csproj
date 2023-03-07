@@ -6,7 +6,7 @@
     <AssemblyName>ToDo</AssemblyName>
     <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
     <ApplicationManifest>app.manifest</ApplicationManifest>
-    <!-- <PublishSingleFile>true</PublishSingleFile> -->
+    <PublishSingleFile>true</PublishSingleFile>
     <PublishAot>true</PublishAot>
   </PropertyGroup>
 

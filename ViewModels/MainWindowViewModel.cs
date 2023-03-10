@@ -46,7 +46,7 @@ public class MainWindowViewModel : ReactiveObject, IActivatableViewModel
         // .AutoRefreshOnObservable(item => item.WhenAnyValue(i => i.IsDone, i => i.Name))
         // .ThenByAscending(i => i.Name)
 
-        // СТАТИСТИКА
+        // STATISTICS
 
         // var shared = _sourceCache
         //     .Connect()
@@ -62,7 +62,7 @@ public class MainWindowViewModel : ReactiveObject, IActivatableViewModel
         // this.WhenAnyValue(vm => vm.DoneItemsCnt, vm => vm.ItemsCnt)
         //     .Subscribe(cnt => StatsString = $"Выполнено задач: {cnt.Item1.ToString()} из {cnt.Item2.ToString()}");
 
-        // НОВАЯ ЗАДАЧА
+        // NEW ITEM
 
         ShowNewItemDialog = new Interaction<NewItemViewModel, ToDoItem?>();
 
@@ -76,7 +76,7 @@ public class MainWindowViewModel : ReactiveObject, IActivatableViewModel
             }
         });
 
-        // РЕДАКТИРОВАТЬ ЗАДАЧУ
+        // EDIT ITEM
 
         ShowEditItemDialog = new Interaction<ItemViewModel, ItemViewModel?>();
 
@@ -93,7 +93,7 @@ public class MainWindowViewModel : ReactiveObject, IActivatableViewModel
         // Удалить задачу
         RemoveItemCommand = ReactiveCommand.Create(() => _sourceCache.Remove(SelectedItem));
 
-        // Активация VM
+        /// VM ACTIVATION
         Activator = new ViewModelActivator();
         this.WhenActivated(
             (CompositeDisposable disposables) =>

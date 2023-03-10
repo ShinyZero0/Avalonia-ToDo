@@ -11,10 +11,12 @@
         Title="Добавить задачу">
 
 <Grid ColumnDefinitions="*" RowDefinitions="auto, *, auto">
-  <TextBox x:Name="InputBox" Grid.Row="0" AcceptsReturn="True" TextWrapping="Wrap" Text="{Binding Name}"/>
-  <TextBox FontFamily="/Assets/Fonts/FiraMono-Regular.ttf#Fira Mono" x:Name="ContentBox" Grid.Row="1" AcceptsReturn="True" TextWrapping="Wrap" Text="{Binding Content}"/>
+  <TextBox x:Name="NameBox" Grid.Row="0" AcceptsReturn="True" TextWrapping="Wrap" Text="{Binding Name}"/>
+  <ScrollViewer Grid.Row="1">
+    <TextBox FontFamily="/Assets/Fonts/FiraMono-Regular.ttf#Fira Mono" x:Name="ContentBox" AcceptsReturn="True" TextWrapping="Wrap" Text="{Binding Content}"/>
+  </ScrollViewer>
   <StackPanel Grid.Row="2" Orientation="Horizontal">
-    <Button IsEnabled="{Binding #InputBox.Text, Converter={StaticResource IsNotNullOrWhiteSpace}}" Content="Добавить" Command="{Binding AcceptNewItemCommand}"/>
+    <Button IsEnabled="{Binding #NameBox.Text, Converter={StaticResource IsNotNullOrWhiteSpace}}" Content="Добавить" Command="{Binding AcceptNewItemCommand}"/>
     <Button Content="Отмена" Command="{Binding CancelCommand}"/>
   </StackPanel>
 </Grid>

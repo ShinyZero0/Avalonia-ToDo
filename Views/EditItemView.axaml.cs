@@ -11,10 +11,10 @@ public partial class EditItemView : ReactiveWindow<EditItemViewModel>
     public EditItemView()
     {
         InitializeComponent();
-        var InputBox = this.FindControl<TextBox>("NameBox");
-        if (InputBox is not null)
+        var NameBox = this.FindControl<TextBox>("NameBox");
+        if (NameBox is not null)
         {
-            InputBox.AttachedToVisualTree += (s, e) => InputBox.Focus();
+            NameBox.AttachedToVisualTree += (s, e) => NameBox.Focus();
         }
         this.WhenActivated(
             d => d(ViewModel.AcceptEditedItemCommand.Subscribe(result => this.Close(result)))

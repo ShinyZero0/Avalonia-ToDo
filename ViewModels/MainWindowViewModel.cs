@@ -64,9 +64,10 @@ public class MainWindowViewModel : ReactiveObject, IActivatableViewModel
 
         ShowEditItemDialog = new Interaction<ItemViewModel, ItemViewModel?>();
 
-        EditItemCommand = ReactiveCommand.CreateFromTask(async () =>
+        EditItemCommand = ReactiveCommand.Create(() =>
         {
-            var result = await ShowEditItemDialog.Handle(SelectedItem);
+            ItemViewModel result = null; 
+            ShowEditItemDialog.Handle(SelectedItem).Subscribe(x => result = x);
             if (result is not null)
             {
                 // _sourceCache.Remove(SelectedItem);

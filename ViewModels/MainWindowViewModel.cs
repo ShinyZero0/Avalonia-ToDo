@@ -31,7 +31,6 @@ public class MainWindowViewModel : ReactiveObject, IActivatableViewModel
             .Select(MakeFilter);
 
         // Забиндить список к Colle
-
         _sourceCache
             .Connect()
             .StartWithEmpty()
@@ -46,21 +45,6 @@ public class MainWindowViewModel : ReactiveObject, IActivatableViewModel
         // .AutoRefreshOnObservable(item => item.WhenAnyValue(i => i.IsDone, i => i.Name))
         // .ThenByAscending(i => i.Name)
 
-        // STATISTICS
-
-        // var shared = _sourceCache
-        //     .Connect()
-        //     .AutoRefreshOnObservable(item => item.WhenAnyValue(i => i.IsDone))
-        //     .ObserveOn(RxApp.MainThreadScheduler)
-        //     .Publish();
-        //
-        // _cleanStats = new CompositeDisposable(
-        //     shared.Filter(item => item.IsDone == true).Count().Subscribe(cnt => DoneItemsCnt = cnt),
-        //     shared.Count().Subscribe(cnt => ItemsCnt = cnt),
-        //     shared.Connect()
-        // );
-        // this.WhenAnyValue(vm => vm.DoneItemsCnt, vm => vm.ItemsCnt)
-        //     .Subscribe(cnt => StatsString = $"Выполнено задач: {cnt.Item1.ToString()} из {cnt.Item2.ToString()}");
 
         // NEW ITEM
 
@@ -105,10 +89,23 @@ public class MainWindowViewModel : ReactiveObject, IActivatableViewModel
                     })
                     .DisposeWith(disposables);
             }
+
+        // STATISTICS
+            // var shared = _sourceCache
+            //     .Connect()
+            //     .AutoRefreshOnObservable(item => item.WhenAnyValue(i => i.IsDone))
+            //     .ObserveOn(RxApp.MainThreadScheduler)
+            //     .Publish();
+            //
+            // _cleanStats = new CompositeDisposable(
+            //     shared.Filter(item => item.IsDone == true).Count().Subscribe(cnt => DoneItemsCnt = cnt),
+            //     shared.Count().Subscribe(cnt => ItemsCnt = cnt),
+            //     shared.Connect()
+            // );
+            // this.WhenAnyValue(vm => vm.DoneItemsCnt, vm => vm.ItemsCnt)
+            //     .Subscribe(cnt => StatsString = $"Выполнено задач: {cnt.Item1.ToString()} из {cnt.Item2.ToString()}");
         );
     }
-
-    /// КОНЕЦ КОНСТРУКТОРА
 
     // Коллекции
     private SourceCache<ItemViewModel, uint> _sourceCache;
@@ -201,3 +198,5 @@ public class MainWindowViewModel : ReactiveObject, IActivatableViewModel
 
     private readonly IDisposable _cleanStats;
 }
+
+// vim:fdm=indent:fdl=1:fcl=all

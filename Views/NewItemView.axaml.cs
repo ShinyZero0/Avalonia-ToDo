@@ -16,8 +16,9 @@ public partial class NewItemView : ReactiveWindow<NewItemViewModel>
         {
             NameBox.AttachedToVisualTree += (s, e) => NameBox.Focus();
         }
+
         this.WhenActivated(
-            d => d(ViewModel.AcceptNewItemCommand.Subscribe(result => Close(result)))
+            d => d(ViewModel.AcceptItemCommand.Subscribe(result => Close(result)))
         );
         this.WhenActivated(d => d(ViewModel.CancelCommand.Subscribe(result => Close())));
     }

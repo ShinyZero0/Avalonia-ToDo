@@ -16,7 +16,7 @@
     <TextBox FontFamily="/Assets/Fonts/FiraMono-Regular.ttf#Fira Mono" x:Name="ContentBox" AcceptsReturn="True" TextWrapping="Wrap" Text="{Binding Content}"/>
   </ScrollViewer>
   <StackPanel Grid.Row="2" Orientation="Horizontal">
-    <Button IsEnabled="{Binding #NameBox.Text, Converter={StaticResource IsNotNullOrWhiteSpace}}" Content="Добавить" Command="{Binding AcceptNewItemCommand}"/>
+    <Button IsEnabled="{Binding #NameBox.Text, Converter={StaticResource IsNotNullOrWhiteSpace}}" Content="Добавить" Command="{Binding AcceptItemCommand}"/>
     <Button Content="Отмена" Command="{Binding CancelCommand}"/>
   </StackPanel>
 </Grid>

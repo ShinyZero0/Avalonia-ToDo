@@ -8,6 +8,7 @@ using DynamicData.PLinq;
 using ToDo.Models;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reactive;
 
 // using Lucene.Net;
 
@@ -45,15 +46,14 @@ public class MainWindowViewModel : ReactiveObject, IActivatableViewModel
         // .AutoRefreshOnObservable(item => item.WhenAnyValue(i => i.IsDone, i => i.Name))
         // .ThenByAscending(i => i.Name)
 
-
         // NEW ITEM
 
-        ShowNewItemDialog = new Interaction<NewItemViewModel, ToDoItem?>();
+        ShowNewItemDialog = new Interaction<Unit, ToDoItem?>();
 
-        NewItemCommand = ReactiveCommand.CreateFromTask(async () =>
+        NewItemCommand = ReactiveCommand.Create(() =>
         {
-            var adder = new NewItemViewModel();
-            var result = await ShowNewItemDialog.Handle(adder);
+            ToDoItem result = null;
+            ShowNewItemDialog.Handle(new Unit()).Subscribe(x => result = x);
             if (result is not null)
             {
                 _sourceCache.AddOrUpdate(new ItemViewModel(result, KeyGen()));
@@ -66,11 +66,10 @@ public class MainWindowViewModel : ReactiveObject, IActivatableViewModel
 
         EditItemCommand = ReactiveCommand.Create(() =>
         {
-            ItemViewModel result = null; 
+            ItemViewModel result = null;
             ShowEditItemDialog.Handle(SelectedItem).Subscribe(x => result = x);
             if (result is not null)
             {
-                // _sourceCache.Remove(SelectedItem);
                 _sourceCache.AddOrUpdate(result);
             }
         });
@@ -78,7 +77,7 @@ public class MainWindowViewModel : ReactiveObject, IActivatableViewModel
         // Удалить задачу
         RemoveItemCommand = ReactiveCommand.Create(() => _sourceCache.Remove(SelectedItem));
 
-        /// VM ACTIVATION
+        // VM ACTIVATION
         Activator = new ViewModelActivator();
         this.WhenActivated(
             (CompositeDisposable disposables) =>
@@ -90,21 +89,20 @@ public class MainWindowViewModel : ReactiveObject, IActivatableViewModel
                     })
                     .DisposeWith(disposables);
             }
-
         // STATISTICS
-            // var shared = _sourceCache
-            //     .Connect()
-            //     .AutoRefreshOnObservable(item => item.WhenAnyValue(i => i.IsDone))
-            //     .ObserveOn(RxApp.MainThreadScheduler)
-            //     .Publish();
-            //
-            // _cleanStats = new CompositeDisposable(
-            //     shared.Filter(item => item.IsDone == true).Count().Subscribe(cnt => DoneItemsCnt = cnt),
-            //     shared.Count().Subscribe(cnt => ItemsCnt = cnt),
-            //     shared.Connect()
-            // );
-            // this.WhenAnyValue(vm => vm.DoneItemsCnt, vm => vm.ItemsCnt)
-            //     .Subscribe(cnt => StatsString = $"Выполнено задач: {cnt.Item1.ToString()} из {cnt.Item2.ToString()}");
+        // var shared = _sourceCache
+        //     .Connect()
+        //     .AutoRefreshOnObservable(item => item.WhenAnyValue(i => i.IsDone))
+        //     .ObserveOn(RxApp.MainThreadScheduler)
+        //     .Publish();
+        //
+        // _cleanStats = new CompositeDisposable(
+        //     shared.Filter(item => item.IsDone == true).Count().Subscribe(cnt => DoneItemsCnt =
+        //     cnt), shared.Count().Subscribe(cnt => ItemsCnt = cnt), shared.Connect()
+        // );
+        // this.WhenAnyValue(vm => vm.DoneItemsCnt, vm => vm.ItemsCnt)
+        //     .Subscribe(cnt => StatsString = $"Выполнено задач: {cnt.Item1.ToString()} из
+        //     {cnt.Item2.ToString()}");
         );
     }
 
@@ -115,7 +113,7 @@ public class MainWindowViewModel : ReactiveObject, IActivatableViewModel
 
     // Новая задача
     public IReactiveCommand NewItemCommand { get; }
-    public Interaction<NewItemViewModel, ToDoItem?> ShowNewItemDialog { get; set; }
+    public Interaction<Unit, ToDoItem?> ShowNewItemDialog { get; set; }
 
     // Редактирование задач
     public IReactiveCommand EditItemCommand { get; }

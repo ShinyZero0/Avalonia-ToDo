@@ -13,7 +13,7 @@ public partial class EditItemViewModel : ReactiveObject
     {
         Name = EditedItem.Name;
         Content = EditedItem.Content;
-        AcceptEditedItemCommand = ReactiveCommand.Create(() =>
+        AcceptItemCommand = ReactiveCommand.Create(() =>
         {
             EditedItem.Name = Name;
             if (string.IsNullOrWhiteSpace(Content)) Content = null;
@@ -35,6 +35,6 @@ public partial class EditItemViewModel : ReactiveObject
         get => _content;
         set => this.RaiseAndSetIfChanged(ref _content, value);
     }
-    public ReactiveCommand<Unit, ItemViewModel> AcceptEditedItemCommand { get; }
+    public ReactiveCommand<Unit, ItemViewModel> AcceptItemCommand { get; }
     public ReactiveCommand<Unit, Unit> CancelCommand { get; }
 }

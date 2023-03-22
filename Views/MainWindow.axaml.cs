@@ -4,6 +4,7 @@ using Avalonia.ReactiveUI;
 using ReactiveUI;
 using ToDo.ViewModels;
 using ToDo.Models;
+using System.Reactive;
 
 namespace ToDo.Views;
 
@@ -34,11 +35,11 @@ public partial class MainWindow : ReactiveWindow<MainWindowViewModel>
     }
 
     private async Task DoShowNewItemDialogAsync(
-        InteractionContext<NewItemViewModel, ToDoItem?> interaction
+        InteractionContext<Unit, ToDoItem?> interaction
     )
     {
         var dialog = new NewItemView();
-        dialog.DataContext = interaction.Input;
+        dialog.DataContext = new NewItemViewModel();
 
         var result = await dialog.ShowDialog<ToDoItem?>(this);
         interaction.SetOutput(result);

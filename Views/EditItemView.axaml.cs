@@ -16,8 +16,9 @@ public partial class EditItemView : ReactiveWindow<EditItemViewModel>
         {
             NameBox.AttachedToVisualTree += (s, e) => NameBox.Focus();
         }
+
         this.WhenActivated(
-            d => d(ViewModel.AcceptEditedItemCommand.Subscribe(result => this.Close(result)))
+            d => d(ViewModel.AcceptItemCommand.Subscribe(result => this.Close(result)))
         );
         this.WhenActivated(d => d(ViewModel.CancelCommand.Subscribe(result => Close())));
     }

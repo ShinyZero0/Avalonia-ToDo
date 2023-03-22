@@ -1,4 +1,5 @@
 using Avalonia.Controls;
+using System;
 using System.Threading.Tasks;
 using Avalonia.ReactiveUI;
 using ReactiveUI;
@@ -16,21 +17,18 @@ public partial class MainWindow : ReactiveWindow<MainWindowViewModel>
         this.WhenActivated(d =>
         {
             d(ViewModel.ShowEditItemDialog.RegisterHandler(DoShowEditItemDialogAsync));
-        });
-        this.WhenActivated(d =>
-        {
             d(ViewModel.ShowNewItemDialog.RegisterHandler(DoShowNewItemDialogAsync));
         });
     }
 
     private async Task DoShowEditItemDialogAsync(
-        InteractionContext<ItemViewModel, ItemViewModel?> interaction
+        InteractionContext<ToDoItem, ToDoItem?> interaction
     )
     {
-        var dialog = new EditItemView();
+        var dialog = new ItemActionView();
         dialog.DataContext = new EditItemViewModel(interaction.Input);
 
-        var result = await dialog.ShowDialog<ItemViewModel?>(this);
+        var result = await dialog.ShowDialog<ToDoItem?>(this);
         interaction.SetOutput(result);
     }
 
@@ -38,7 +36,7 @@ public partial class MainWindow : ReactiveWindow<MainWindowViewModel>
         InteractionContext<Unit, ToDoItem?> interaction
     )
     {
-        var dialog = new NewItemView();
+        var dialog = new ItemActionView();
         dialog.DataContext = new NewItemViewModel();
 
         var result = await dialog.ShowDialog<ToDoItem?>(this);

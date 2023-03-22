@@ -3,12 +3,9 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:vm="using:ToDo.ViewModels"
-        x:DataType="vm:EditItemViewModel"
-        x:CompileBindings="True"
         Width="400" Height="300"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-        x:Class="ToDo.Views.EditItemView"
-        Title="EditItemView">
+        x:Class="ToDo.Views.ItemActionView">
 
 <Grid ColumnDefinitions="*" RowDefinitions="auto, *, auto">
   <TextBox x:Name="NameBox" Grid.Row="0" AcceptsReturn="True" TextWrapping="Wrap" Text="{Binding Name}"/>

@@ -7,7 +7,7 @@ using System.Reactive;
 
 namespace ToDo.ViewModels;
 
-public partial class NewItemViewModel : ReactiveObject
+public partial class NewItemViewModel : ReactiveObject, IItemActionViewModel
 {
     public NewItemViewModel()
     {

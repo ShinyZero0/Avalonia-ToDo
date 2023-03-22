@@ -52,26 +52,30 @@ public class MainWindowViewModel : ReactiveObject, IActivatableViewModel
 
         NewItemCommand = ReactiveCommand.Create(() =>
         {
-            ToDoItem result = null;
-            ShowNewItemDialog.Handle(new Unit()).Subscribe(x => result = x);
-            if (result is not null)
-            {
-                _sourceCache.AddOrUpdate(new ItemViewModel(result, KeyGen()));
-            }
+            ShowNewItemDialog
+                .Handle(new Unit())
+                .Take(1)
+                .Subscribe(result =>
+                {
+                    if (result is not null)
+                        _sourceCache.AddOrUpdate(new ItemViewModel(result, KeyGen()));
+                });
         });
 
         // EDIT ITEM
 
-        ShowEditItemDialog = new Interaction<ItemViewModel, ItemViewModel?>();
+        ShowEditItemDialog = new Interaction<ToDoItem, ToDoItem?>();
 
         EditItemCommand = ReactiveCommand.Create(() =>
         {
-            ItemViewModel result = null;
-            ShowEditItemDialog.Handle(SelectedItem).Subscribe(x => result = x);
-            if (result is not null)
-            {
-                _sourceCache.AddOrUpdate(result);
-            }
+            ShowEditItemDialog
+                .Handle(SelectedItem.ToToDoItem())
+                .Take(1)
+                .Subscribe(result =>
+                {
+                    if (result is not null)
+                        _sourceCache.AddOrUpdate(new ItemViewModel(result, SelectedItem.Key));
+                });
         });
 
         // Удалить задачу
@@ -89,6 +93,7 @@ public class MainWindowViewModel : ReactiveObject, IActivatableViewModel
                     })
                     .DisposeWith(disposables);
             }
+        );
         // STATISTICS
         // var shared = _sourceCache
         //     .Connect()
@@ -103,7 +108,6 @@ public class MainWindowViewModel : ReactiveObject, IActivatableViewModel
         // this.WhenAnyValue(vm => vm.DoneItemsCnt, vm => vm.ItemsCnt)
         //     .Subscribe(cnt => StatsString = $"Выполнено задач: {cnt.Item1.ToString()} из
         //     {cnt.Item2.ToString()}");
-        );
     }
 
     // Коллекции
@@ -117,7 +121,7 @@ public class MainWindowViewModel : ReactiveObject, IActivatableViewModel
 
     // Редактирование задач
     public IReactiveCommand EditItemCommand { get; }
-    public Interaction<ItemViewModel, ItemViewModel?> ShowEditItemDialog { get; set; }
+    public Interaction<ToDoItem, ToDoItem?> ShowEditItemDialog { get; set; }
 
     // Удаление задач
     public IReactiveCommand RemoveItemCommand { get; }
@@ -198,4 +202,4 @@ public class MainWindowViewModel : ReactiveObject, IActivatableViewModel
     private readonly IDisposable _cleanStats;
 }
 
-// vim:fdm=indent:fdl=1:fcl=all
+// vim:fdm=indent:fdl=1

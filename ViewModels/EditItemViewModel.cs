@@ -7,9 +7,9 @@ using System.Reactive;
 
 namespace ToDo.ViewModels;
 
-public partial class EditItemViewModel : ReactiveObject
+public partial class EditItemViewModel : ReactiveObject, IItemActionViewModel
 {
-    public EditItemViewModel(ItemViewModel EditedItem)
+    public EditItemViewModel(ToDoItem EditedItem)
     {
         Name = EditedItem.Name;
         Content = EditedItem.Content;
@@ -35,6 +35,6 @@ public partial class EditItemViewModel : ReactiveObject
         get => _content;
         set => this.RaiseAndSetIfChanged(ref _content, value);
     }
-    public ReactiveCommand<Unit, ItemViewModel> AcceptItemCommand { get; }
+    public ReactiveCommand<Unit, ToDoItem> AcceptItemCommand { get; }
     public ReactiveCommand<Unit, Unit> CancelCommand { get; }
 }

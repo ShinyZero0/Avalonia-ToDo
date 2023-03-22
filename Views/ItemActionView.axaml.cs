@@ -6,9 +6,9 @@ using ReactiveUI;
 
 namespace ToDo.Views;
 
-public partial class EditItemView : ReactiveWindow<EditItemViewModel>
+public partial class ItemActionView : ReactiveWindow<IItemActionViewModel>
 {
-    public EditItemView()
+    public ItemActionView()
     {
         InitializeComponent();
         var NameBox = this.FindControl<TextBox>("NameBox");

@@ -1,17 +1,16 @@
-<Application xmlns="https://github.com/avaloniaui"
+﻿<Application x:Class="ToDo.App" xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="using:ToDo"
-             xmlns:v="clr-namespace:ToDo.Views"
-             x:Class="ToDo.App">
+             xmlns:local="using:ToDo" xmlns:v="clr-namespace:ToDo.Views"
+             >
   <Application.DataTemplates>
-    <local:ViewLocator/>
+    <local:ViewLocator />
   </Application.DataTemplates>
 
   <Application.RequestedThemeVariant>Light</Application.RequestedThemeVariant>
   <Application.Styles>
-    <FluentTheme  />
+    <FluentTheme />
   </Application.Styles>
   <Application.Resources>
-    <v:IsNotNullOrWhiteSpace x:Key="IsNotNullOrWhiteSpace"/>
+    <v:IsNotNullOrWhiteSpace x:Key="IsNotNullOrWhiteSpace" />
   </Application.Resources>
 </Application>

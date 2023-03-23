@@ -1,22 +1,34 @@
-<Window xmlns="https://github.com/avaloniaui"
+﻿<Window x:Class="ToDo.Views.ItemActionView"
+        xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:vm="using:ToDo.ViewModels"
-        Width="400" Height="300"
-        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         Title="{Binding WindowTitle}"
-        x:Class="ToDo.Views.ItemActionView">
+        Width="400" Height="300"
+        d:DesignHeight="450" d:DesignWidth="800"
+        mc:Ignorable="d"
+        >
 
-<Grid ColumnDefinitions="*" RowDefinitions="auto, *, auto">
-  <TextBox x:Name="NameBox" Grid.Row="0" Watermark="Заголовок" TextWrapping="Wrap" Text="{Binding Name}"/>
-  <ScrollViewer Grid.Row="1">
-    <TextBox x:Name="ContentBox" Watermark="Подробности (необязательно)" FontFamily="/Assets/Fonts/FiraMono-Regular.ttf#Fira Mono" AcceptsReturn="True" TextWrapping="Wrap" Text="{Binding Content}"/>
-  </ScrollViewer>
-  <StackPanel Grid.Row="2" Orientation="Horizontal">
-    <Button IsEnabled="{Binding #NameBox.Text, Converter={StaticResource IsNotNullOrWhiteSpace}}" Content="Принять" Command="{Binding AcceptItemCommand}"/>
-    <Button Content="Отмена" Command="{Binding CancelCommand}"/>
-  </StackPanel>
-</Grid>
+  <Grid ColumnDefinitions="*" RowDefinitions="auto, *, auto">
+    <TextBox x:Name="NameBox" Grid.Row="0"
+             TextWrapping="Wrap" Watermark="Заголовок"
+             Text="{Binding Name}"
+             />
+    <ScrollViewer Grid.Row="1">
+      <TextBox x:Name="ContentBox" AcceptsReturn="True"
+               FontFamily="/Assets/Fonts/FiraMono-Regular.ttf#Fira Mono"
+               TextWrapping="Wrap" Watermark="Подробности (необязательно)"
+               Text="{Binding Content}"
+               />
+    </ScrollViewer>
+    <StackPanel Grid.Row="2" Orientation="Horizontal">
+      <Button Command="{Binding AcceptItemCommand}"
+              IsEnabled="{Binding #NameBox.Text, Converter={StaticResource IsNotNullOrWhiteSpace}}"
+              Content="Принять"
+              />
+      <Button Command="{Binding CancelCommand}" Content="Отмена" />
+    </StackPanel>
+  </Grid>
 
 </Window>

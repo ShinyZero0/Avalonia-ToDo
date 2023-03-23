@@ -1,66 +1,83 @@
-<Window xmlns="https://github.com/avaloniaui"
+﻿<Window x:Class="ToDo.Views.MainWindow"
+        xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:vm="using:ToDo.ViewModels"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:local="clr-namespace:ToDo.Views"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:md="clr-namespace:Markdown.Avalonia;assembly=Markdown.Avalonia"
-        xmlns:local="clr-namespace:ToDo.Views"
-        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        xmlns:vm="using:ToDo.ViewModels" Title="Список задач"
         Width="500" Height="600"
-        x:Class="ToDo.Views.MainWindow"
-        x:DataType="vm:MainWindowViewModel"
-        x:CompileBindings="True"
-        Icon="/Assets/icon-note.png"
-        Title="Список задач">
+        d:DesignHeight="450" d:DesignWidth="800"
+        x:CompileBindings="True" x:DataType="vm:MainWindowViewModel"
+        Icon="/Assets/icon-note.png" mc:Ignorable="d"
+        >
 
-<Window.Resources>
-  <local:GetCheckBoxIcon x:Key="GetCheckBoxIcon"/>
-</Window.Resources>
+  <Window.Resources>
+    <local:GetCheckBoxIcon x:Key="GetCheckBoxIcon" />
+  </Window.Resources>
 
-<Window.Styles>
-  <!-- <Style Selector="CheckBox.Fold:unchecked"> -->
-  <!--   <Setter Property="Glyph" Value="G" /> -->
-  <!-- </Style> -->
-</Window.Styles>
+  <Window.Styles>
+    <!-- <Style Selector="CheckBox.Fold:unchecked"> -->
+    <!--   <Setter Property="Glyph" Value="G" /> -->
+    <!-- </Style> -->
+  </Window.Styles>
 
-<Grid ColumnDefinitions="*" RowDefinitions="auto, *, auto">
-  <TextBox Grid.Row="0" Text="{Binding SearchText}"/>
-  <ScrollViewer Grid.Row="1">
-    <ListBox x:Name="TheListBox" SelectedItem="{Binding SelectedItem}" Items="{Binding Colle}">
-      <ListBox.ItemTemplate>
-        <DataTemplate>
-          <Grid RowDefinitions="auto, auto" ColumnDefinitions="auto, *, auto">
-            <CheckBox Grid.Column="0" IsChecked="{Binding IsDone}"/>
-            <TextBlock Grid.Column="1" TextWrapping="Wrap" VerticalAlignment="Center" Text="{Binding Name}"/>
-            <CheckBox IsVisible="{Binding Content, Converter={x:Static ObjectConverters.IsNotNull}}" x:Name="VisibilityToggle" IsChecked="False" Grid.Column="2">
-              <CheckBox.Template>
-                <ControlTemplate>
-                  <Image Source="{TemplateBinding IsChecked, Converter={StaticResource GetCheckBoxIcon}}" Margin="0,0,10,0" Width="24" Height="24" />
-                </ControlTemplate>
-              </CheckBox.Template>
-            </CheckBox>
-            <md:MarkdownScrollViewer Grid.Row="1" Grid.Column="1" IsVisible="{Binding #VisibilityToggle.IsChecked}" Markdown="{Binding Content}" />
-            <!-- <TextBlock x:Name="ContentBlock" Grid.Row="1" Grid.Column="1" IsVisible="{Binding #VisibilityToggle.IsChecked}" TextWrapping="Wrap" Text="{Binding Content}" /> -->
-          </Grid>
-        </DataTemplate>
-      </ListBox.ItemTemplate>
-    </ListBox>
-  </ScrollViewer>
+  <Grid ColumnDefinitions="*" RowDefinitions="auto, *, auto">
+    <TextBox Grid.Row="0" Text="{Binding SearchText}" />
+    <ScrollViewer Grid.Row="1">
+      <ListBox x:Name="TheListBox"
+               Items="{Binding Colle}"
+               SelectedItem="{Binding SelectedItem}"
+               >
+        <ListBox.ItemTemplate>
+          <DataTemplate>
+            <Grid ColumnDefinitions="auto, *, auto" RowDefinitions="auto, auto">
+              <CheckBox Grid.Column="0" IsChecked="{Binding IsDone}" />
+              <TextBlock Grid.Column="1" VerticalAlignment="Center"
+                         TextWrapping="Wrap"
+                         Text="{Binding Name}"
+                         />
+              <CheckBox x:Name="VisibilityToggle" Grid.Column="2"
+                        IsChecked="False"
+                        IsVisible="{Binding Content, Converter={x:Static ObjectConverters.IsNotNull}}"
+                        >
+                <CheckBox.Template>
+                  <ControlTemplate>
+                    <Image Width="24" Height="24"
+                           Margin="0,0,10,0"
+                           Source="{TemplateBinding IsChecked,
+                                                    Converter={StaticResource GetCheckBoxIcon}}"
+                           />
+                  </ControlTemplate>
+                </CheckBox.Template>
+              </CheckBox>
+              <md:MarkdownScrollViewer Grid.Row="1" Grid.Column="1"
+                                       IsVisible="{Binding #VisibilityToggle.IsChecked}"
+                                       Markdown="{Binding Content}"
+                                       />
+              <!-- <TextBlock x:Name="ContentBlock" Grid.Row="1" Grid.Column="1" IsVisible="{Binding #VisibilityToggle.IsChecked}" TextWrapping="Wrap" Text="{Binding Content}" /> -->
+            </Grid>
+          </DataTemplate>
+        </ListBox.ItemTemplate>
+      </ListBox>
+    </ScrollViewer>
 
-  <StackPanel Grid.Row="2" Orientation="Vertical">
-    <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Center">
-      <Button Command="{Binding NewItemCommand}">
-        Добавить
-      </Button>
-      <Button Command="{Binding EditItemCommand}" IsEnabled="{Binding #TheListBox.SelectedItem, Converter={x:Static ObjectConverters.IsNotNull}}">
-        Изменить
-      </Button>
-      <Button Command="{Binding RemoveItemCommand}" IsEnabled="{Binding #TheListBox.SelectedItem, Converter={x:Static ObjectConverters.IsNotNull}}">
-        Удалить
-      </Button>
+    <StackPanel Grid.Row="2" Orientation="Vertical">
+      <StackPanel HorizontalAlignment="Center" VerticalAlignment="Bottom"
+                  Orientation="Horizontal"
+                  >
+        <Button Command="{Binding NewItemCommand}">
+          Добавить
+        </Button>
+        <Button Command="{Binding EditItemCommand}" IsEnabled="{Binding #TheListBox.SelectedItem, Converter={x:Static ObjectConverters.IsNotNull}}">
+          Изменить
+        </Button>
+        <Button Command="{Binding RemoveItemCommand}" IsEnabled="{Binding #TheListBox.SelectedItem, Converter={x:Static ObjectConverters.IsNotNull}}">
+          Удалить
+        </Button>
+      </StackPanel>
+      <!-- <TextBlock Text="{Binding DoneItemsCnt}"/> -->
     </StackPanel>
-    <!-- <TextBlock Text="{Binding DoneItemsCnt}"/> -->
-  </StackPanel>
-</Grid>
+  </Grid>
 
 </Window>

@@ -34,4 +34,5 @@ public partial class NewItemViewModel : ReactiveObject, IItemActionViewModel
     }
     public ReactiveCommand<Unit, ToDoItem> AcceptItemCommand { get; }
     public ReactiveCommand<Unit, Unit> CancelCommand { get; }
+    public const string WindowTitle = "Создание задачи";
 }

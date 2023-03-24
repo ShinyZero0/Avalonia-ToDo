@@ -1,7 +1,7 @@
 {
     "AttributesTolerance": 2,
     "KeepFirstAttributeOnSameLine": true,
-    "MaxAttributeCharactersPerLine": 60,
+    "MaxAttributeCharactersPerLine": 80,
     "MaxAttributesPerLine": 2,
     "NewlineExemptionElements": "RadialGradientBrush, GradientStop, LinearGradientBrush, ScaleTransform, SkewTransform, RotateTransform, TranslateTransform, Trigger, Condition, Setter",
     "SeparateByGroups": false,

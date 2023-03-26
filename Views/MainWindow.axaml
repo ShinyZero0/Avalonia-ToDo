@@ -24,13 +24,19 @@
   <Grid ColumnDefinitions="*" RowDefinitions="auto, *, auto">
     <TextBox Grid.Row="0" Text="{Binding SearchText}" />
     <ScrollViewer Grid.Row="1">
-      <ItemsControl x:Name="TheItemsControl"
-               Items="{Binding Colle}"
-               SelectedItem="{Binding SelectedItem}"
-               >
+      <ItemsControl x:Name="TheItemsControl" Items="{Binding Colle}">
+        <!-- SelectedItem="{Binding SelectedItem}" -->
         <ItemsControl.ItemTemplate>
           <DataTemplate>
-            <Grid ColumnDefinitions="auto, *, auto" RowDefinitions="auto, auto">
+            <Grid ColumnDefinitions="auto, *, auto" RowDefinitions="auto, auto" Margin="5,10">
+              <Grid.ContextMenu>
+                <ContextMenu>
+                  <MenuItem  Header="Изменить" />
+                  <MenuItem  Header="Удалить" />
+                  <!-- Command="{Binding Path=(vm:MainWindowViewModel.EditItemCommand)}" -->
+                  <!-- Command="{Binding Path=(vm:MainWindowViewModel.RemoveItemCommand)}" -->
+                </ContextMenu>
+              </Grid.ContextMenu>
               <CheckBox Grid.Column="0" IsChecked="{Binding IsDone}" />
               <TextBlock Grid.Column="1" VerticalAlignment="Center"
                          TextWrapping="Wrap"
@@ -67,12 +73,6 @@
                   >
         <Button Command="{Binding NewItemCommand}">
           Добавить
-        </Button>
-        <Button Command="{Binding EditItemCommand}" IsEnabled="{Binding #TheItemsControl.SelectedItem, Converter={x:Static ObjectConverters.IsNotNull}}">
-          Изменить
-        </Button>
-        <Button Command="{Binding RemoveItemCommand}" IsEnabled="{Binding #TheItemsControl.SelectedItem, Converter={x:Static ObjectConverters.IsNotNull}}">
-          Удалить
         </Button>
       </StackPanel>
       <!-- <TextBlock Text="{Binding DoneItemsCnt}"/> -->

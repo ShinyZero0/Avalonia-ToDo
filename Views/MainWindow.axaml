@@ -32,7 +32,7 @@
               <Grid.ContextMenu>
                 <ContextMenu>
                   <MenuItem  Header="Изменить" />
-                  <MenuItem  Header="Удалить" />
+                  <MenuItem Command="{Binding RemoveItemCommand, RelativeSource={RelativeSource Mode=FindAncestor AncestorType=Window Tree=Logical}}" Header="Удалить" />
                   <!-- Command="{Binding Path=(vm:MainWindowViewModel.EditItemCommand)}" -->
                   <!-- Command="{Binding Path=(vm:MainWindowViewModel.RemoveItemCommand)}" -->
                 </ContextMenu>

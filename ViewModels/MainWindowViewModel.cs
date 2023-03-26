@@ -80,7 +80,7 @@ public class MainWindowViewModel : ReactiveObject, IActivatableViewModel
         });
 
         // Удалить задачу
-        RemoveItemCommand = ReactiveCommand.Create(() => _sourceCache.Remove(SelectedItem));
+        RemoveItemCommand = ReactiveCommand.Create((ItemViewModel item) => _sourceCache.Remove(item));
 
         // VM ACTIVATION
         Activator = new ViewModelActivator();

@@ -9,6 +9,7 @@ using ToDo.Models;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reactive;
+using DynamicData.Binding;
 
 // using Lucene.Net;
 
@@ -34,13 +35,13 @@ public class MainWindowViewModel : ReactiveObject, IActivatableViewModel
         // Забиндить список к Colle
         _sourceCache
             .Connect()
-            .StartWithEmpty()
+            // .StartWithEmpty()
             .AutoRefreshOnObservable(item => item.WhenAnyValue(i => i.IsDone, i => i.Name))
-            .Filter(filter)
-            // .Sort(SortExpressionComparer<ItemViewModel>.Ascending(i => Convert.ToByte(i.IsDone)))
+            // .Filter(filter)
+            .Sort(SortExpressionComparer<ItemViewModel>.Ascending(i => Convert.ToByte(i.IsDone)))
             .ObserveOn(RxApp.MainThreadScheduler)
             .Bind(out _colle)
-            .DisposeMany()
+            // .DisposeMany()
             .Subscribe();
 
         // .AutoRefreshOnObservable(item => item.WhenAnyValue(i => i.IsDone, i => i.Name))

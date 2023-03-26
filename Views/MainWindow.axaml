@@ -24,11 +24,11 @@
   <Grid ColumnDefinitions="*" RowDefinitions="auto, *, auto">
     <TextBox Grid.Row="0" Text="{Binding SearchText}" />
     <ScrollViewer Grid.Row="1">
-      <ListBox x:Name="TheListBox"
+      <ItemsControl x:Name="TheItemsControl"
                Items="{Binding Colle}"
                SelectedItem="{Binding SelectedItem}"
                >
-        <ListBox.ItemTemplate>
+        <ItemsControl.ItemTemplate>
           <DataTemplate>
             <Grid ColumnDefinitions="auto, *, auto" RowDefinitions="auto, auto">
               <CheckBox Grid.Column="0" IsChecked="{Binding IsDone}" />
@@ -57,8 +57,8 @@
               <!-- <TextBlock x:Name="ContentBlock" Grid.Row="1" Grid.Column="1" IsVisible="{Binding #VisibilityToggle.IsChecked}" TextWrapping="Wrap" Text="{Binding Content}" /> -->
             </Grid>
           </DataTemplate>
-        </ListBox.ItemTemplate>
-      </ListBox>
+        </ItemsControl.ItemTemplate>
+      </ItemsControl>
     </ScrollViewer>
 
     <StackPanel Grid.Row="2" Orientation="Vertical">
@@ -68,10 +68,10 @@
         <Button Command="{Binding NewItemCommand}">
           Добавить
         </Button>
-        <Button Command="{Binding EditItemCommand}" IsEnabled="{Binding #TheListBox.SelectedItem, Converter={x:Static ObjectConverters.IsNotNull}}">
+        <Button Command="{Binding EditItemCommand}" IsEnabled="{Binding #TheItemsControl.SelectedItem, Converter={x:Static ObjectConverters.IsNotNull}}">
           Изменить
         </Button>
-        <Button Command="{Binding RemoveItemCommand}" IsEnabled="{Binding #TheListBox.SelectedItem, Converter={x:Static ObjectConverters.IsNotNull}}">
+        <Button Command="{Binding RemoveItemCommand}" IsEnabled="{Binding #TheItemsControl.SelectedItem, Converter={x:Static ObjectConverters.IsNotNull}}">
           Удалить
         </Button>
       </StackPanel>
